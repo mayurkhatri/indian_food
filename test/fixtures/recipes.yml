@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  information: MyString
+  preparation_method: MyText
+  preparation_time: 2014-04-29 22:52:41
+  cooking_time: 2014-04-29 22:52:41
+  serves: 1
+
+two:
+  name: MyString
+  information: MyString
+  preparation_method: MyText
+  preparation_time: 2014-04-29 22:52:41
+  cooking_time: 2014-04-29 22:52:41
+  serves: 1
