@@ -1,0 +1,5 @@
+class CreateJoinTableDishCategory < ActiveRecord::Migration
+  def change
+    create_table cate
+  end
+end

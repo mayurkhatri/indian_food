@@ -1,0 +1,55 @@
+<%= form_for @recipe do |form| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explaination">
+      <h1><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h1>
+      <ul>
+        <%= @recipe.errors.full_messages do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>  
+  <% end %>
+
+  <div class="fields">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div class="fields">
+    <%= form.label :information %><br/>
+    <%= form.text_area :information, size: "50x3" %>
+  </div>
+  
+  
+  <label id="hours">Hours</label>
+  <%= select_tag "select_hours", hours %>
+  
+  <p>
+    <label id="minutes">Minutes</label>
+    <%= select_tag "select_minutes", minutes %>
+  </p>
+  <div class="fields">
+    <%= form.label :preparation_time %><br/>
+    <%= form.hidden_field :preparation_time %>
+  </div>
+  
+  <div class="fields">
+    <%= form.label :cooking_time%><br/>
+    <%= form.text_field :cooking_time %>
+  </div>
+  
+  <div class="fields">
+    <%= form.label :serves %><br/>
+    <%= form.text_field :serves %>  
+  </div>
+
+  <div class="fields">
+    <%= form.label :preparation_method %><br/>
+    <%= form.text_area :preparation_method, size: "50x15" %>
+  </div>
+  
+  <div class="action">
+    <%= form.submit %>
+  </div>
+<% end %>
+

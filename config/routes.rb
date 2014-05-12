@@ -1,4 +1,18 @@
 IndianFood::Application.routes.draw do
+#  get "recipes/index"
+
+#  get "users/index"
+
+#  get "users/new"
+  
+  match "/admin" => "recipes#index", as: :admin
+
+  devise_for :users
+  
+  resources :recipes
+  
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +62,7 @@ IndianFood::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'users#index'
 
   # See how all your routes lay out with "rake routes"
 

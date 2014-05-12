@@ -1,0 +1,23 @@
+<h1>Recipe List</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>    
+  </tr>
+<% unless @recipes.blank? %>  
+  <% @recipes.each do |recipe| %>  
+    <tr>
+      <td><%= recipe.name %></td>
+      <td><%= link_to 'Show', recipe_path(recipe) %></td>
+      <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>        
+      <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure? '} %></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New', new_recipe_path %>

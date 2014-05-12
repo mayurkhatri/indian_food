@@ -1,0 +1,16 @@
+<p>
+  <b>Recipe Name</b>
+  <%= @recipe.name %>
+  <b>Preparation Time</b>
+  <%= @recipe.preparation_time%>
+  
+  <label id="hours">Hours</label>
+  <%= select_tag "select_hours", hours, "1"%>
+  
+  <label id="minutes">Minutes</label>
+  <%= select_tag "select_minutes", minutes, @minutes.to_i %>
+  
+</p>
+
+<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
+<%= link_to 'Back', recipes_path %>
