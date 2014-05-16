@@ -14,8 +14,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     arr_time = []
     arr_time = Recipe.calculate_time(@recipe.preparation_time)
-    @hours = arr_time[0]
-    @minutes = arr_time[1]
+    @preparation_hours = arr_time[0]
+    @preparation_minutes = arr_time[1]
+    arr_time = Recipe.calculate_time(@recipe.cooking_time)
+    @cooking_hours = arr_time[0]
+    @cooking_minutes = arr_time[1]
     respond_to do |format|
       format.html
       format.json { render json: @recipe }
@@ -24,12 +27,12 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
-    @hours = 0
-    @minutes = 1
+    @preparation_hours, @cooking_hours = 0
+    @preparation_minutes, @cooking_minutes = 1
     
     respond_to do |format|
       format.html
-      format.json { resnder json: @recipe }
+      format.json { render json: @recipe }
     end
   end
   
@@ -39,7 +42,8 @@ class RecipesController < ApplicationController
   
   def create
     @recipe = Recipe.new(params[:recipe])
-    @recipe.preparation_time = Recipe.calculate_minutes(params[:select_hours], params[:select_minutes])
+    @recipe.preparation_time = Recipe.calculate_minutes(params[:preparation_hours], params[:preparation_minutes])
+    @recipe.cooking_time = Recipe.calculate_minutes(params[:cooking_hours], params[:cooking_minutes])
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }

@@ -1,5 +1,4 @@
 class Recipe < ActiveRecord::Base
- # before_save :calculate_time 
   attr_accessible :cooking_time, :information, :name, :preparation_method, :preparation_time, :serves
   resourcify
   
@@ -15,8 +14,14 @@ class Recipe < ActiveRecord::Base
   
   def self.calculate_time(minutes)
    time = []
-   time[0] = minutes / 60
-   time[1] = (minutes % 60)
+   time[0] = minutes.blank? ? 0 : minutes / 60
+   time[1] = minutes.blank? ? 0 :(minutes % 60)
    time
+  end
+  
+  def self.insert_break(input_string)
+    unless input_string.blank?
+      input_string.gsub("\n", "<br/>")
+    end
   end
 end

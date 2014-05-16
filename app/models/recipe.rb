@@ -14,8 +14,8 @@ class Recipe < ActiveRecord::Base
   
   def self.calculate_time(minutes)
    time = []
-   time[0] = minutes / 60
-   time[1] = (minutes % 60)
+   time[0] = minutes.blank? ? 0 : minutes / 60
+   time[1] = minutes.blank? ? 0 :(minutes % 60)
    time
   end
 end

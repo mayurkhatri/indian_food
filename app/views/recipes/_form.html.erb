@@ -20,23 +20,29 @@
     <%= form.text_area :information, size: "50x3" %>
   </div>
   
-  
-  <label id="hours">Hours</label>
-  <%= select_tag "select_hours", hours %>
-  
-  <p>
-    <label id="minutes">Minutes</label>
-    <%= select_tag "select_minutes", minutes %>
-  </p>
   <div class="fields">
     <%= form.label :preparation_time %><br/>
     <%= form.hidden_field :preparation_time %>
   </div>
   
+  <p id="preparation_time">
+    <label id="hours">Hours</label>
+    <%= select_tag "preparation_hours", preparation_hours %>
+    <label id="minutes">Minutes</label>
+    <%= select_tag "preparation_minutes", preparation_minutes %>
+  </p>
+  
   <div class="fields">
     <%= form.label :cooking_time%><br/>
-    <%= form.text_field :cooking_time %>
+    <%= form.hidden_field :cooking_time %>
   </div>
+  
+  <p id="cooking_time">
+    <label id="cooking_hours">Hours</label>
+    <%= select_tag "cooking_hours", cooking_hours %>
+    <label id="cooking_minutes">Minutes</label>
+    <%= select_tag "cooking_minutes", cooking_minutes %>
+  </p>
   
   <div class="fields">
     <%= form.label :serves %><br/>

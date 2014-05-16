@@ -1,15 +1,44 @@
 <p>
   <b>Recipe Name</b>
   <%= @recipe.name %>
+</p>
+<br/>
+<p>
+  <b>Information</b>
+  <%= @recipe.information %>
+</p>
+<p>
   <b>Preparation Time</b>
-  <%= @recipe.preparation_time%>
-  
-  <label id="hours">Hours</label>
-  <%= select_tag "select_hours", hours %>
-  
-  <label id="minutes">Minutes</label>
-  <%= select_tag "select_minutes", minutes %>
-  
+</p>
+<br/>
+<p>  
+  <label id="preparation_hours">Hours</label>
+  <%= select_tag "preparation_hours", preparation_hours %>
+  <label id="preparation_minutes">Minutes</label>
+  <%= select_tag "preparation_minutes", preparation_minutes %>
+</p>
+<br/>
+<p>
+  <b>Cooking Time</b>
+</p>
+<p>
+  <label id="cooking_hours"></label>
+  <%= select_tag "cooking_hours", cooking_hours %>
+  <label id="cooking_minutes"></label>
+  <%= select_tag "cooking_minutes", cooking_minutes %>
+</p>
+<br/>
+
+<p>
+  <label id="serves">Serves</label>
+  <%= @recipe.serves %>
+</p>
+
+<p>
+  <label id="preparation_method">Preparation Method</label>
+  <div>
+    <%= insert_break(@recipe.preparation_method).html_safe %>
+  </div>
 </p>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
