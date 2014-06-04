@@ -12,13 +12,12 @@ class RecipesController < ApplicationController
   
   def show
     @recipe = Recipe.find(params[:id])
-    arr_time = []
-    arr_time = Recipe.calculate_time(@recipe.preparation_time)
-    @preparation_hours = arr_time[0]
-    @preparation_minutes = arr_time[1]
-    arr_time = Recipe.calculate_time(@recipe.cooking_time)
-    @cooking_hours = arr_time[0]
-    @cooking_minutes = arr_time[1]
+
+    @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
+    @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
+    @start_preparation_time_unit = @recipe.start_preparation_time >= 60 ? "hours" : "minutes"
+    @end_preparation_time_unit = @recipe.end_preparation_time >= 60 ? "hours" : "minutes"
+    
     respond_to do |format|
       format.html
       format.json { render json: @recipe }
@@ -27,8 +26,11 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
-    @preparation_hours, @cooking_hours = 0
-    @preparation_minutes, @cooking_minutes = 1
+    
+    @start_preparation_time, @start_cooking_time = "1"
+    @end_preparation_time, @end_cooking_time = "30"
+    @start_preparation_time_unit, @start_cooking_time_unit = "minutes"
+    @end_preparation_time_unit, @end_cooking_time_unit = "minutes"
     
     respond_to do |format|
       format.html
@@ -41,9 +43,12 @@ class RecipesController < ApplicationController
   end
   
   def create
+  
+    debugger
     @recipe = Recipe.new(params[:recipe])
-    @recipe.preparation_time = Recipe.calculate_minutes(params[:preparation_hours], params[:preparation_minutes])
-    @recipe.cooking_time = Recipe.calculate_minutes(params[:cooking_hours], params[:cooking_minutes])
+    
+    @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
+    @recipe.end_preparation_time = Recipe.calculate_minutes(params[:start_cooking_time], params[:end_cooking_time])
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }

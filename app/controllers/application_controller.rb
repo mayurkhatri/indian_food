@@ -6,11 +6,13 @@ class ApplicationController < ActionController::Base
   
   def layout_by_resource
     unless current_user.blank?
-    if !current_user.has_role? :admin
-      "admin"
-    else
-      "application"
-    end
+      if current_user.has_role? :admin
+        puts "========>>>>> In layout_by_resource admin if block"
+        return "admin"
+      else
+        puts "========>>>>> In layout_by_resource admin else block"
+        return "application"
+      end
     end
   end
 end

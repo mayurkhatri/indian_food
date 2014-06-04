@@ -12,22 +12,16 @@
 </p>
 <br/>
 <p>  
-  <label id="preparation_hours">Hours</label>
-  <%= select_tag "preparation_hours", preparation_hours %>
-  <label id="preparation_minutes">Minutes</label>
-  <%= select_tag "preparation_minutes", preparation_minutes %>
+  <label id="start_preparation_time">Preparation Time</label>
+  <%= select_tag "start_preparation_time", start_preparation_time %>
+  <label>&nbsp &nbsp to &nbsp &nbsp</label>
+  <%= select_tag "end_preparation_minutes", end_preparation_time %>
 </p>
 <br/>
 <p>
   <b>Cooking Time</b>
 </p>
-<p>
-  <label id="cooking_hours"></label>
-  <%= select_tag "cooking_hours", cooking_hours %>
-  <label id="cooking_minutes"></label>
-  <%= select_tag "cooking_minutes", cooking_minutes %>
-</p>
-<br/>
+
 
 <p>
   <label id="serves">Serves</label>
@@ -37,7 +31,7 @@
 <p>
   <label id="preparation_method">Preparation Method</label>
   <div>
-    <%= insert_break(@recipe.preparation_method).html_safe %>
+    <%= insert_break(@recipe.preparation_method) %>
   </div>
 </p>
 

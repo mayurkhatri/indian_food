@@ -26,12 +26,12 @@
   </div>
   
   <p id="preparation_time">
-    <label id="hours">Hours</label>
-    <%= select_tag "preparation_hours", preparation_hours %>
-    <label id="minutes">Minutes</label>
-    <%= select_tag "preparation_minutes", preparation_minutes %>
+    <%= select_tag "start_preparation_time", start_preparation_time %>
+    <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
+    <label>&nbsp &nbsp to &nbsp &nbsp</label>
+    <%= select_tag "end_preparation_time", end_preparation_time %>
+    <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
   </p>
-
   
   <div class="fields">
     <%= form.label :cooking_time%><br/>
@@ -39,10 +39,11 @@
   </div>
   
   <p id="cooking_time">
-    <label id="cooking_hours">Hours</label>
-    <%= select_tag "cooking_hours", cooking_hours %>
-    <label id="cooking_minutes">Minutes</label>
-    <%= select_tag "cooking_minutes", cooking_minutes %>
+    <%= select_tag "start_cooking_time", start_cooking_time %>
+    <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
+    <label>&nbsp &nbsp to &nbsp &nbsp</label>
+    <%= select_tag "end_cooking_time", end_cooking_time %>
+    <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
   </p>
   
   <div class="fields">
