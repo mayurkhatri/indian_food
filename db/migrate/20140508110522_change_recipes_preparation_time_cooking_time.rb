@@ -1,4 +1,4 @@
-class ChangeRecipesPreparationTimeCookingTime < ActiveRecord::Migration
+ class ChangeRecipesPreparationTimeCookingTime < ActiveRecord::Migration
   def up
     change_table :recipes do |t|
       t.change :preparation_time, :integer

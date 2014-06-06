@@ -1,5 +1,5 @@
 class Recipe < ActiveRecord::Base
-  attr_accessible :cooking_time, :information, :name, :preparation_method, :preparation_time, :serves
+  attr_accessible :information, :name, :preparation_method, :start_cooking_time, :start_preparation_time, :end_cooking_time, :end_preparation_time, :serves
   resourcify
   
   has_and_belongs_to_many :dishes
@@ -8,7 +8,8 @@ class Recipe < ActiveRecord::Base
   has_and_belongs_to_many :occassions
   
   def self.calculate_minutes(time, unit)
-    puts "------=====>>>>>>"+unit
+#        debugger
+#    puts "------=====>>>>>>"+unit
     if unit.eql?("hours")
       minutes = (time.to_i * 60)
     else
