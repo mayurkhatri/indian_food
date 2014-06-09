@@ -7,9 +7,6 @@
   <b>Information</b>
   <%= @recipe.information %>
 </p>
-<p>
-  <b>Preparation Time</b>
-</p>
 <br/>
 <p>  
   <label id="preparation_time">Preparation Time</label>
@@ -20,9 +17,6 @@
   <%= select_tag "end_preparation_time_unit", end_preparation_time_unit%>
 </p>
 <br/>
-<p>
-  <b>Cooking Time</b>
-</p>
 <p>
   <label id="cooking_time">Cooking Time</label>
   <%= select_tag "start_cooking_time", start_cooking_time %>

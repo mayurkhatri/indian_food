@@ -9,12 +9,12 @@ module RecipesHelper
   end
   
   def start_preparation_time
-    minutes = [*1..59]
+    minutes = (0..55).select do |i| i%5 == 0 end
     options_for_select(minutes.zip(minutes), @start_preparation_time)
   end
   
   def end_preparation_time
-    minutes = [*1..59]
+    minutes = (5..55).select do |i| i%5 == 0 end
     options_for_select(minutes.zip(minutes), @end_preparation_time)
   end
   
@@ -27,13 +27,18 @@ module RecipesHelper
   end
   
   def start_cooking_time
-    minutes = [*1..59]
+    minutes = (0..55).select do |i| i%5 == 0 end
     options_for_select(minutes.zip(minutes), @start_cooking_time)
   end
   
   def end_cooking_time
-    minutes = [*1..59]
+    minutes = (0..55).select do |i| i%5 == 0 end
     options_for_select(minutes.zip(minutes), @end_cooking_time)
+  end
+  
+  def serves
+    serving = [*1..20]
+    options_for_select(serving, @serves)
   end
   
   def insert_break(input_string)

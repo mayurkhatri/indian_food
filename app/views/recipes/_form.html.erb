@@ -20,6 +20,7 @@
     <%= form.text_area :information, size: "50x3" %>
   </div>
 
+  <label>Preparation Time</label>
   <p id="preparation_time">
     <%= select_tag "start_preparation_time", start_preparation_time %>
     <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
@@ -28,6 +29,7 @@
     <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
   </p>
 
+  <label>Cooking Time</label>
   <p id="cooking_time">
     <%= select_tag "start_cooking_time", start_cooking_time %>
     <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
@@ -38,7 +40,7 @@
   
   <div class="fields">
     <%= form.label :serves %><br/>
-    <%= form.text_field :serves %>  
+    <%= select_tag "serves", serves %>  
   </div>
 
   <div class="fields">
@@ -50,4 +52,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-
