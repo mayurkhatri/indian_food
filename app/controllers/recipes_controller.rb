@@ -48,6 +48,18 @@ class RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
+    
+    @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
+    @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
+    @start_preparation_time_unit = @recipe.start_preparation_time >= 60 ? "hours" : "minutes"
+    @end_preparation_time_unit = @recipe.end_preparation_time >= 60 ? "hours" : "minutes"
+    
+    @start_cooking_time = @recipe.start_cooking_time >= 60 ? Recipe.calculate_time(@recipe.start_cooking_time) : @recipe.start_cooking_time
+    @end_cooking_time = @recipe.end_cooking_time >= 60 ? Recipe.calculate_time(@recipe.end_cooking_time) : @recipe.end_cooking_time
+    @start_cooking_time_unit = @recipe.start_cooking_time >= 60 ? "hours" : "minutes"
+    @end_cooking_time_unit = @recipe.end_cooking_time >= 60 ? "hours" : "minutes"
+    
+    @serves = @recipe.serves
   end
   
   def create

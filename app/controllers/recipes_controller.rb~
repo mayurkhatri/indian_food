@@ -48,11 +48,22 @@ class RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
+    
+    @start_preparation_time = params[:start_preparation_time]
+    @end_preparation_time = params[:end_preparation_time]
+    @start_preparation_time_unit = params[:start_preparation_time_unit]
+    @end_preparation_time_unit = params[:end_preparation_time_unit]
+    
+    @start_cooking_time = params[:start_cooking_time]
+    @end_cooking_time = params[:end_cooking_time]
+    @start_cooking_time_unit = params[:start_cooking_time_unit]
+    @end_cooking_time_unit = params[:end_cooking_time_unit]
+    
+    @serves = @recipe.serves
   end
   
   def create
-  
-#    debugger
+
     @recipe = Recipe.new(params[:recipe])
     
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
@@ -74,7 +85,6 @@ class RecipesController < ApplicationController
   end
   
   def update
-    debugger
     @recipe = Recipe.find(params[:id])
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])

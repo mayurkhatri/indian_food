@@ -19,8 +19,9 @@
     <%= form.label :information %><br/>
     <%= form.text_area :information, size: "50x3" %>
   </div>
-
+  
   <label>Preparation Time</label>
+  <% if params[:action] == 'new' %>
   <p id="preparation_time">
     <%= select_tag "start_preparation_time", start_preparation_time %>
     <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
@@ -28,6 +29,10 @@
     <%= select_tag "end_preparation_time", end_preparation_time %>
     <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
   </p>
+  <% elsif params[:action] == 'show' %>
+    <%form.text_field%>  
+  <% end %>
+
 
   <label>Cooking Time</label>
   <p id="cooking_time">
@@ -52,4 +57,3 @@
     <%= form.submit %>
   </div>
 <% end %>
-

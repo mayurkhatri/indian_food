@@ -10,25 +10,25 @@
 <br/>
 <p>  
   <label id="preparation_time">Preparation Time</label>
-  <%= select_tag "start_preparation_time", start_preparation_time %>
-  <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
+  <%= @start_preparation_time %>
+  <%= @start_preparation_time_unit %>
   <label>&nbsp &nbsp to &nbsp &nbsp</label>
-  <%= select_tag "end_preparation_time", end_preparation_time %>
-  <%= select_tag "end_preparation_time_unit", end_preparation_time_unit%>
+  <%= @end_preparation_time %>
+  <%= @end_preparation_time_unit%>
 </p>
 <br/>
 <p>
   <label id="cooking_time">Cooking Time</label>
-  <%= select_tag "start_cooking_time", start_cooking_time %>
-  <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
+  <%= @start_cooking_time %>
+  <%= @start_cooking_time_unit %>
   <label>&nbsp &nbsp to &nbsp &nbsp</label>
-  <%= select_tag "end_cooking_time", end_cooking_time %>
-  <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
+  <%= @end_cooking_time %>
+  <%= @end_cooking_time_unit %>
 </p>
 
 <p>
-  <label id="serves">Serves</label>
-  <%= select_tag "serves", serves %>
+  <label id="serves">Serves &nbsp</label>
+  <%= @recipe.serves %>
 </p>
 
 <p>
