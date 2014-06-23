@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_time, :only => [:create, :update]
+  before_filter :set_time_unit, :only => [:create, :update]
   
   def index
     @recipes = Recipe.all
@@ -63,8 +65,6 @@ class RecipesController < ApplicationController
   end
   
   def create
-  
-#    debugger
     @recipe = Recipe.new(params[:recipe])
     
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
@@ -73,7 +73,7 @@ class RecipesController < ApplicationController
     @recipe.start_cooking_time = Recipe.calculate_minutes(params[:start_cooking_time], params[:start_cooking_time_unit])
     @recipe.end_cooking_time = Recipe.calculate_minutes(params[:end_cooking_time], params[:end_cooking_time_unit])
     @recipe.serves = params[:serves]
-
+    
     respond_to do |format|
       if @recipe.save
         format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
@@ -86,7 +86,6 @@ class RecipesController < ApplicationController
   end
   
   def update
-    debugger
     @recipe = Recipe.find(params[:id])
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
@@ -114,5 +113,21 @@ class RecipesController < ApplicationController
       format.html { redirect_to recipes_url }
       format.json { head :no_content }
     end
+  end
+  
+  def set_time
+    debugger
+    @start_preparation_time = params[:start_preparation_time]
+    @end_preparation_time = params[:end_preparation_time]
+    @start_cooking_time = params[:start_cooking_time]
+    @end_cooking_time = params[:end_cooking_time]
+  end
+  
+  def set_time_unit
+    debugger
+    @start_preparation_time_unit = params[:start_preparation_time_unit]
+    @end_preparation_time_unit = params[:end_preparation_time_unit]
+    @start_cooking_time_unit = params[:start_cooking_time_unit]
+    @end_cooking_time_unit = params[:end_cooking_time_unit]
   end
 end

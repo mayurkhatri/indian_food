@@ -9,13 +9,21 @@ module RecipesHelper
   end
   
   def start_preparation_time
-    minutes = (0..55).select do |i| i%5 == 0 end
-    options_for_select(minutes.zip(minutes), @start_preparation_time)
+    if @start_preparation_time_unit.eql?("minutes")
+      time_values = (1..55).select do |i| i%5 == 0 end
+    elsif @start_preparation_time_unit.eql?("hours")
+      time_values = (1..10)      
+    end
+    options_for_select(time_values.zip(time_values), @start_preparation_time)
   end
   
   def end_preparation_time
-    minutes = (5..55).select do |i| i%5 == 0 end
-    options_for_select(minutes.zip(minutes), @end_preparation_time)
+    if @end_preparation_time_unit.eql?("minutes")
+      time_values = (1..55).select do |i| i%5 == 0 end
+    elsif 
+      time_values = (1..10)
+    end
+    options_for_select(time_values.zip(time_values), @end_preparation_time)
   end
   
   def start_cooking_time_unit
@@ -27,13 +35,21 @@ module RecipesHelper
   end
   
   def start_cooking_time
-    minutes = (0..55).select do |i| i%5 == 0 end
-    options_for_select(minutes.zip(minutes), @start_cooking_time)
+    if @start_cooking_time_unit.eql?("minutes")
+      time_values = (0..55).select do |i| i%5 == 0 end
+    elsif @start_cooking_time_unit.eql?("hours")
+      time_values = (0..10)
+    end
+    options_for_select(time_values.zip(time_values), @start_cooking_time)
   end
   
   def end_cooking_time
-    minutes = (0..55).select do |i| i%5 == 0 end
-    options_for_select(minutes.zip(minutes), @end_cooking_time)
+    if @end_cooking_time_unit.eql?("minutes")
+      time_values = (0..55).select do |i| i%5 == 0 end
+    elsif @end_cooking_time_unit.eql?("hours")
+      time_values = (0..10)
+    end
+    options_for_select(time_values.zip(time_values), @end_cooking_time)
   end
   
   def serves
