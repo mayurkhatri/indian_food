@@ -15,6 +15,10 @@
     <%= form.text_field :name %>
   </div>
   
+  <div>
+    <input id="error_messages" type="hidden">*This field is required</input>
+  </div>
+  
   <div class="fields">
     <%= form.label :information %><br/>
     <%= form.text_area :information, size: "50x3" %>

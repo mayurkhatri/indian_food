@@ -120,4 +120,33 @@ $(document).ready(function(){
       appendOptions(hours_array, end_cooking_time)
     }
   });
+  
+  $("#recipe_name").focusout(function(){
+    var val = $(this).val();
+    if(val == '') {
+      $(this).css("border-color","red").css("border-style", "solid").css("border-width","1px");
+      $("#error_messages").css("visibility","visible");
+    }
+  });
+  $("#recipe_name").focusin(function(){
+    $(this).css("border-color","#DCE6F7").css("border-style", "none");
+  });
+  $("#recipe_information").focusout(function(){
+    var val = $(this).val();
+    if(val == '') {
+      $(this).css("border-color","red").css("border-style", "solid").css("border-width","1px");  
+    }
+  });
+  $("#recipe_information").focusin(function(){
+    $(this).css("border-color","#DCE6F7").css("border-style", "none");
+  });
+  $("#recipe_preparation_method").focusout(function(){
+    var val = $(this).val();
+    if(val == '') {
+      $(this).css("border-color","red").css("border-style", "solid");  
+    }
+  });
+  $("#recipe_preparation_method").focusin(function(){
+    $(this).css("border-color","#DCE6F7").css("border-style", "none").css("border-width","1px");
+  });
 });

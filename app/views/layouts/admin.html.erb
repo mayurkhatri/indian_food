@@ -9,20 +9,21 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="notice"><%= alert %></p>
-
+<div id="header">
 <div id="home_link">
   <%= link_to 'Home', recipes_path %>
 </div>
-
+<div></div>
 <div id="signout_link">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>.Not you?
     <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
   <% end %>
 </div>
-</p>
+</div>
 <br/><br/><br/>
+<p id="body">
 <%= yield %>
-
+</p>
 </body>
 </html>

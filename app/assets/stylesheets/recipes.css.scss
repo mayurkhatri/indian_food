@@ -6,7 +6,6 @@ form {
     margin: 0 auto;
 }
 
-
 textarea {
     width: 30%;
 }
@@ -15,12 +14,21 @@ input {
     width: 30%;
 }
 
+#header {
+  padding-bottom: 50px;
+  background-color: #719AA7;
+}
+
 body {
-  background-color: #fff;
+  margin-top: -10px;
+  background-color: #DCE6F7;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  div {
+    border-color: #DCE6F7;
+  }
 }
 
 p, ol, ul, td {
@@ -92,9 +100,16 @@ div {
 #signout_link {
   float: right;
   font-size: 110%;
+  width:50%;
+  text-align: right;
 }
 
 #home_link {
   float: left; 
   font-size: 120%;
+  width:50%;
+}
+
+#error_messages {
+  color: #ff0000;
 }

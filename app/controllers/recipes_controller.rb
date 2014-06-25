@@ -116,7 +116,6 @@ class RecipesController < ApplicationController
   end
   
   def set_time
-    debugger
     @start_preparation_time = params[:start_preparation_time]
     @end_preparation_time = params[:end_preparation_time]
     @start_cooking_time = params[:start_cooking_time]
@@ -124,7 +123,6 @@ class RecipesController < ApplicationController
   end
   
   def set_time_unit
-    debugger
     @start_preparation_time_unit = params[:start_preparation_time_unit]
     @end_preparation_time_unit = params[:end_preparation_time_unit]
     @start_cooking_time_unit = params[:start_cooking_time_unit]
