@@ -19,6 +19,27 @@ $(document).ready(function(){
     }
   }
   
+  function appendErrorLabel(element){
+    $(element).css({'border-color':'red', 'border-style':'solid','border-width':'1px'});
+    var id = $(element).attr('id')+'_error';
+    $("."+id).prev().remove();
+    $("."+id).remove();
+    var label = $('<label>');
+    label.text('* This field is required');
+    label.css('color','red');
+    label.attr('class', id);
+    var br_label = $("<br/>").add(label)
+    $(br_label).insertAfter(element);
+  }
+  
+  function hideErrorLabel(element){
+    $(element).css({'border-color':'#DCE6F7','border-style':'none'});
+    
+    var id = $(element).attr('id')+'_error';
+    $("."+id).prev().remove();
+    $("."+id).remove();
+  }
+  
   for(var i=1;i<=10;i++) {
     hours_array.push(i);
   }
@@ -124,29 +145,43 @@ $(document).ready(function(){
   $("#recipe_name").focusout(function(){
     var val = $(this).val();
     if(val == '') {
-      $(this).css("border-color","red").css("border-style", "solid").css("border-width","1px");
-      $("#error_messages").css("visibility","visible");
+      appendErrorLabel(this);
+    } else {
+      hideErrorLabel(this);    
     }
   });
   $("#recipe_name").focusin(function(){
-    $(this).css("border-color","#DCE6F7").css("border-style", "none");
+    hideErrorLabel(this);    
   });
-  $("#recipe_information").focusout(function(){
+  $("#recipe_information").focusout(function(event){
     var val = $(this).val();
     if(val == '') {
-      $(this).css("border-color","red").css("border-style", "solid").css("border-width","1px");  
+      appendErrorLabel(this);
+    } else {
+      hideErrorLabel(this);
     }
   });
   $("#recipe_information").focusin(function(){
-    $(this).css("border-color","#DCE6F7").css("border-style", "none");
+    hideErrorLabel(this);
   });
   $("#recipe_preparation_method").focusout(function(){
     var val = $(this).val();
     if(val == '') {
-      $(this).css("border-color","red").css("border-style", "solid");  
+      appendErrorLabel(this);
+    } else {
+      hideErrorLabel(this);    
     }
   });
   $("#recipe_preparation_method").focusin(function(){
-    $(this).css("border-color","#DCE6F7").css("border-style", "none").css("border-width","1px");
+    hideErrorLabel(this);
+  });
+  $(document).click(function(){
+    $("#recipe_information").off("focusout",false);
+  });
+  $("input[name='commit']").click(function(){
+    $("#recipe_information").on("focusout", false);
+  });
+  $("#recipe_form").submit(function(event){
+    $("#recipe_information").on("focusout", false);
   });
 });

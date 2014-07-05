@@ -1,9 +1,9 @@
-<%= form_for @recipe do |form| %>
+<%= form_for @recipe, :html => { :id => "recipe_form" } do |form| %>
   <% if @recipe.errors.any? %>
     <div id="error_explaination">
       <h1><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h1>
       <ul>
-        <%= @recipe.errors.full_messages do |msg| %>
+        <%= @recipe.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
       </ul>
@@ -13,10 +13,6 @@
   <div class="fields">
     <%= form.label :name %><br/>
     <%= form.text_field :name %>
-  </div>
-  
-  <div>
-    <input id="error_messages" type="hidden">*This field is required</input>
   </div>
   
   <div class="fields">

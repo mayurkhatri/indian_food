@@ -7,8 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="notice"><%= alert %></p>
 <div id="header">
 <div id="home_link">
   <%= link_to 'Home', recipes_path %>
@@ -21,7 +19,7 @@
   <% end %>
 </div>
 </div>
-<br/><br/><br/>
+<p class="notice"><%= notice %></p>
 <p id="body">
 <%= yield %>
 </p>
