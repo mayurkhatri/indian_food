@@ -1,17 +1,19 @@
 // Place all the styles related to the recipes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-form {
-    width: 80%;
-    margin: 0 auto;
-}
 
 textarea {
-    width: 30%;
+  width: 30%;
 }
 
 input {
-    width: 30%;
+  width: 30%;
+}
+
+#page-wrap {
+  padding-top: 1%;
+  width: 80%;
+  margin: 0 auto;
 }
 
 #header {
@@ -20,12 +22,13 @@ input {
 }
 
 body {
- // margin-top: -10px;
   background-color: #DCE6F7;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  margin: 0;
+  padding:0;
   div {
     border-color: #DCE6F7;
   }
@@ -64,20 +67,7 @@ div {
   color: green;
 }
 
-.field_with_errors {
- input { 
-   border-color: red;
-   border-style:  solid;
-   border-width: 1px;
-   background-color: rgb(255, 239, 239);
- }
- textarea {
-   border-color: red;
-   border-style: solid;
-   border-width: 1px;
-   background-color: rgb(255, 239, 239);
- }
-}
+
 
 #error_explaination {
   width: 450px;
@@ -110,14 +100,28 @@ div {
   font-size: 110%;
   width:50%;
   text-align: right;
+  padding-right: 10%;
 }
 
 #home_link {
   float: left; 
   font-size: 120%;
   width:50%;
+  padding-left:10%;
 }
 
 #error_messages {
   color: #ff0000;
+}
+
+#banner {
+  width: 80%;
+  #banner-heading {
+    font-size: 50px;
+    font-family: 'Times New Roman';
+  }
+}
+
+#error_preparation_time {
+  color: red;
 }

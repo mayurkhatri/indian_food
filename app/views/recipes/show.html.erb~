@@ -1,4 +1,6 @@
 <p>
+  <%= image_tag @recipe.image_url(:big).to_s%>
+  <br/>
   <b>Recipe Name</b>
   <%= @recipe.name %>
 </p>
@@ -27,7 +29,7 @@
 </p>
 
 <p>
-  <label id="serves">Serves</label>
+  <label id="serves">Serves &nbsp</label>
   <%= @recipe.serves %>
 </p>
 

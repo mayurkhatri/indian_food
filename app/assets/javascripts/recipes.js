@@ -17,29 +17,49 @@ $(document).ready(function(){
         option.value = array[i];
         selectTag.appendChild(option);
     }
-  }
+  };
   
-  function appendErrorLabel(element){
+  function applyErrorStyle(element){
     $(element).css({'border-color':'red', 'border-style':'solid','border-width':'1px'});
-    var id = $(element).attr('id')+'_error';
-    $("."+id).prev().remove();
-    $("."+id).remove();
-    var label = $('<label>');
-    label.text('* This field is required');
-    label.css('color','red');
-    label.attr('class', id);
-    var br_label = $("<br/>").add(label)
-    $(br_label).insertAfter(element);
-  }
+  };
   
-  function hideErrorLabel(element){
+  function hideErrorStyle(element){
     $(element).css({'border-color':'#DCE6F7','border-style':'none'});
-    
-    var id = $(element).attr('id')+'_error';
-    $("."+id).prev().remove();
-    $("."+id).remove();
-  }
+  };
   
+  function preparationTimeValidation() {
+    var errorString = "Start time greater than end time";
+    var end_prep_time = parseInt($("#end_preparation_time").val());
+    var start_prep_time = parseInt($("#start_preparation_time").val());
+    if($("#start_preparation_time_unit").val() == $("#end_preparation_time_unit").val()) {
+      if(start_prep_time > end_prep_time) { 
+        $("#error_preparation_time").text(errorString);
+      } else if (start_prep_time <= end_prep_time) {
+        $("#error_preparation_time").text("");
+      }
+    }
+  };
+  
+  function cookingTimeValidation() {
+    var errorString = "Start time greater than end time";
+    var start_cook_time = parseInt($("#start_cooking_time").val());
+    var end_cook_time = parseInt($("#end_cooking_time").val());
+    if($("#start_cooking_time_unit").val() == $("#end_cooking_time_unit").val()) {
+      if(start_cook_time > end_cook_time) {
+        $("#error_cooking_time").text(errorString);
+      } else if (start_cook_time <= end_cook_time) {
+        $("#error_cooking_time").text("");
+      }  
+    }
+  };
+
+  // Hide the notice contents
+  setTimeout(function() {
+    $(".notice").contents().filter(function(){
+      return this.nodeType === 3;
+    }).remove();
+  }, 3000);	
+
   for(var i=1;i<=10;i++) {
     hours_array.push(i);
   }
@@ -142,38 +162,56 @@ $(document).ready(function(){
     }
   });
   
+  $("#start_preparation_time").change(function(){
+    preparationTimeValidation();
+  });
+  
+  $("#end_preparation_time").change(function(){
+    preparationTimeValidation();
+  });
+  
+  $("#start_cooking_time").change(function() {
+    cookingTimeValidation();
+  });
+  
+  $("#end_cooking_time").change(function() {
+    cookingTimeValidation();
+  });
+  
   $("#recipe_name").focusout(function(){
     var val = $(this).val();
     if(val == '') {
-      appendErrorLabel(this);
+      applyErrorStyle(this);
     } else {
-      hideErrorLabel(this);    
+      hideErrorStyle(this);    
     }
   });
   $("#recipe_name").focusin(function(){
-    hideErrorLabel(this);    
+    hideErrorStyle(this);
   });
-  $("#recipe_information").focusout(function(event){
+  
+  $("#recipe_information").focusout(function(){
     var val = $(this).val();
     if(val == '') {
-      appendErrorLabel(this);
+      applyErrorStyle(this);
     } else {
-      hideErrorLabel(this);
+      hideErrorStyle(this);    
     }
   });
   $("#recipe_information").focusin(function(){
-    hideErrorLabel(this);
+    hideErrorStyle(this);
   });
+  
   $("#recipe_preparation_method").focusout(function(){
     var val = $(this).val();
     if(val == '') {
-      appendErrorLabel(this);
+      applyErrorStyle(this);
     } else {
-      hideErrorLabel(this);    
+      hideErrorStyle(this);    
     }
   });
   $("#recipe_preparation_method").focusin(function(){
-    hideErrorLabel(this);
+    hideErrorStyle(this);
   });
   $(document).click(function(){
     $("#recipe_information").off("focusout",false);

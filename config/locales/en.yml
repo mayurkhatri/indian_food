@@ -3,3 +3,6 @@
 
 en:
   hello: "Hello world"
+  errors:
+    messages:
+      start_time: "start time should be less than end time"

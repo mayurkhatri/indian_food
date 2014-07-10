@@ -1,4 +1,5 @@
-<%= form_for @recipe, :html => { :id => "recipe_form" } do |form| %>
+<div id="container-inner">
+<%= form_for @recipe, :html => { :id => "recipe_form", :multipart => true }, :validate => true do |form| %>
   <% if @recipe.errors.any? %>
     <div id="error_explaination">
       <h1><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h1>
@@ -19,6 +20,12 @@
     <%= form.label :information %><br/>
     <%= form.text_area :information, size: "50x3" %>
   </div>
+  
+  <% if controller.action_name.eql?("edit") %>
+    <%= image_tag @recipe.image_url(:thumb).to_s %>
+  <% end%>
+  <%= form.file_field :image %>
+  <br/>
 
   <label>Preparation Time</label>
   <p id="preparation_time">
@@ -27,7 +34,9 @@
     <label>&nbsp &nbsp to &nbsp &nbsp</label>
     <%= select_tag "end_preparation_time", end_preparation_time %>
     <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
+    <label id="error_preparation_time"></label>
   </p>
+  
 
   <label>Cooking Time</label>
   <p id="cooking_time">
@@ -36,6 +45,7 @@
     <label>&nbsp &nbsp to &nbsp &nbsp</label>
     <%= select_tag "end_cooking_time", end_cooking_time %>
     <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
+    <label id="error_cooking_time"></label>
   </p>
   
   <div class="fields">
@@ -52,3 +62,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

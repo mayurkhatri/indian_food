@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140606044344) do
+ActiveRecord::Schema.define(:version => 20140705161432) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20140606044344) do
     t.integer  "end_preparation_time"
     t.integer  "start_cooking_time",     :default => 0
     t.integer  "end_cooking_time",       :default => 0
+    t.string   "image"
   end
 
   create_table "roles", :force => true do |t|

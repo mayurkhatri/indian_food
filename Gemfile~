@@ -24,7 +24,10 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'rolify'
 gem 'mysql2'
-gem 
+gem 'carrierwave'
+gem 'rmagick'
+gem 'client_side_validations'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -14,4 +14,26 @@
 
 .multiline {
   white-space:pre;
-}		
+}	
+
+.field_with_errors {
+  display: inline;
+  input { 
+    border-color: red;
+    border-style:  solid;
+    border-width: 1px;
+    background-color: rgb(255, 239, 239);
+  }
+  textarea {
+    border-color: red;
+    border-style: solid;
+    border-width: 1px;
+    background-color: rgb(255, 239, 239);
+  }
+}
+	
+.field_with_errors .message {
+  color: red;
+  padding-left: 5px;
+  font-size: 12px;
+}
