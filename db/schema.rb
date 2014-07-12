@@ -11,20 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140705161432) do
+ActiveRecord::Schema.define(:version => 20140712092715) do
 
-  create_table "categories", :force => true do |t|
+  create_table "courses", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "categories_dishes", :force => true do |t|
-    t.integer "category_id"
+  create_table "courses_dishes", :force => true do |t|
+    t.integer "course_id"
     t.integer "dish_id"
   end
 
-  add_index "categories_dishes", ["category_id", "dish_id"], :name => "index_categories_dishes_on_category_id_and_dish_id"
+  add_index "courses_dishes", ["course_id", "dish_id"], :name => "index_courses_dishes_on_category_id_and_dish_id"
+  add_index "courses_dishes", ["course_id", "dish_id"], :name => "index_courses_dishes_on_course_id_and_dish_id"
 
   create_table "cuisines", :force => true do |t|
     t.string   "name"

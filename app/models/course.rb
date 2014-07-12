@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Course < ActiveRecord::Base
   attr_accessible :name
   
   has_many :recipes, :as => :recipeable

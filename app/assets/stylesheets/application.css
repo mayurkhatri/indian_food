@@ -37,3 +37,21 @@
   padding-left: 5px;
   font-size: 12px;
 }
+
+.page {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  height: 800px;
+  line-height: 1em;
+  background-color: white;
+  border-left: 1px solid #F4FCFC;
+  border-top: 1px solid #F4FCFC;
+  border-right: 1px solid #F4FCFC;
+  border-bottom: 1px solid #F4FCFC;
+}
+
+.container-inner {
+  padding-left: 15px;
+  width: 200%;
+}

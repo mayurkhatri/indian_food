@@ -1,10 +1,19 @@
 IndianFood::Application.routes.draw do
-#  get "recipes/index"
-
-#  get "users/index"
-
-#  get "users/new"
   
+  get "courses/index"
+
+  get "courses/new"
+
+  get "courses/show"
+
+  get "courses/edit"
+
+  get "courses/create"
+
+  get "courses/update"
+
+  get "courses/destroy"
+
   match "/admin" => "recipes#index", as: :admin
 
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }

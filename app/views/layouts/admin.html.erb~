@@ -20,14 +20,28 @@
   <% end %>
 </div>
 </div>
-<p class="notice"><%= notice %></p>
+<div id="notice">
+  <p class="notice"><%= notice %></p>
+</div>
 <div id="page-wrap">
 <div id="banner">
   <span id="banner-heading">INDIAN FOOD</span>
   <h1 id="sub-heading"></h1>
 </div>
 <p id="body">
-<%= yield %>
+<div class="table">
+  <ol id="admin-site-navigation">
+    <li><a href="/recipes">Home</a></li>
+    <li><a href="#">Recipes</a></li>
+    <li><a href="#">About</a></li>    
+  </ol>
+</div>
+<div class="page">
+  <div class="container-inner">
+    <%= yield %>
+  </div>
+</div>
+<div id="footer"></div>
 </p>
 </div>
 </body>

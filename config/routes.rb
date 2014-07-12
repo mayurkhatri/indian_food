@@ -7,6 +7,8 @@ IndianFood::Application.routes.draw do
   resources :recipes
   
   resources :users
+  
+  resources :courses
 
 
   # The priority is based upon order of creation:

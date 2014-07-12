@@ -89,6 +89,8 @@ $(document).ready(function(){
       appendOptions(minutes_array, end_preparation_time)
       appendOptions(minutes_array, start_preparation_time)
     }
+    // reset the error msg
+    $("#error_preparation_time").text("");
   });  
   
   // end_preparation_time_unit change
@@ -111,6 +113,8 @@ $(document).ready(function(){
       }
       appendOptions(hours_array, end_preparation_time)
     }
+    // reset the error msg
+    $("#error_preparation_time").text("");
   });  
   
   // start_cooking_time_unit change
@@ -138,6 +142,8 @@ $(document).ready(function(){
       }
       appendOptions(hours_array, end_cooking_time)
     }
+    // reset the error msg    
+    $("#error_cooking_time").text("");
   });  
   
   // end_cooking_time_unit change
@@ -160,6 +166,8 @@ $(document).ready(function(){
       }
       appendOptions(hours_array, end_cooking_time)
     }
+    // reset the error msg    
+    $("#error_cooking_time").text("");
   });
   
   $("#start_preparation_time").change(function(){
