@@ -32,7 +32,7 @@
 <div class="table">
   <ol id="admin-site-navigation">
     <li><a href="/recipes">Home</a></li>
-    <li><a href="#">Recipes</a></li>
+    <li><a href="/courses">Recipes</a></li>
     <li><a href="#">About</a></li>    
   </ol>
 </div>

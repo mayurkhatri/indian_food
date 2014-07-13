@@ -6,19 +6,17 @@
     <th></th>
     <th></th>        
   </tr>
-  <% unless @courses.blank? %>
-    <% @courses.each do |course| %>
-    <tr>
-      <td><%= course.name %></td>
-      <td><%= link_to 'Show', course_path(course) %></td>                  
-      <td><%= link_to 'Edit', edit_course_path(course) %></td>
-      <td><%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-    <% end %>
+<% unless @courses.blank? %>
+  <% @courses.each do |course| %>
+  <tr>
+    <td><%= course.name %></td>
+    <td><%= link_to 'Show', course_path(course) %></td>                  
+    <td><%= link_to 'Edit', edit_course_path(course) %></td>
+    <td><%= link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
   <% end %>
-
-</table>
-
-<%= @courses.each do |course| %>
-  <%= @course.name %>
 <% end %>
+</table>
+<br/>
+
+<%= link_to 'New', new_course_path %>
