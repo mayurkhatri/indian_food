@@ -2,18 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-textarea {
-  width: 30%;
-}
-
-input {
-  width: 30%;
-}
-
 #page-wrap {
-  padding-top: 1%;
   width: 80%;
-  margin: 0 auto;
+  margin: 25px auto;
 }
 
 #header {
@@ -127,13 +118,18 @@ div {
   margin: 0 auto;
 }
 
-#admin-site-navigation {
+ol#admin-site-navigation {
   background-color: rgba(126, 131, 131, 0.9);
-  height: 35px;  
+  border-left: 1px solid #717575;
+  border-top: 1px solid #B1B4B4;
+  border-right: 1px solid #B1B4B4;
+  border-bottom: 1px solid #717575;
+  height: 32px; 
+  font-size: 12px; 
   list-style-type: none;
   margin: 0;
   padding: 0;
-  padding-top: 10px;
+  line-height: 25px;
   align-content: center;
   li {
     display: inline;
@@ -144,21 +140,38 @@ div {
   }
 }
 
+#recipe_name {
+  width: 520px;
+}
+
+#recipe_information {
+  width: 520px;
+}
+
 #recipe-details {
-// width: 800px;
- margin: 0;
+ margin: 0 auto;
+ position: relative;
+ height: 200px;
   #image-container {
-    width: 30%;
+    width: 200px;
+    position:absolute;
     float: left;
     overflow: hidden;
+    padding-top: 10px;
   }
 
   #recipe-amounts {
-    width: 70%;
-    float: left;
+    width: 550px;
+    position: absolute;
+    float: right;
     overflow: hidden;
-    margin-left: -15%;
+    padding-left: 220px;
   }
+}
+
+textarea#recipe_preparation_method {
+  height: 200px;
+  width: 520px;
 }
 
 #error_preparation_time {
@@ -168,3 +181,19 @@ div {
 #error_cooking_time {
   color: red;
 }
+
+.container-inner {
+  padding-left: 15px;
+  width: 800px;
+  line-height: 2em;
+  position: relative;
+  padding-top: 15px;
+}
+
+#recipe_form .action input{
+    width:100px; 
+    text-align:center;
+    margin-left: 220px;
+}
+
+

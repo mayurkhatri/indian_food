@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
   
   def show
     @recipe = Recipe.find(params[:id])
+    @course = @recipe.course
 
     @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
     @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
@@ -35,6 +36,8 @@ class RecipesController < ApplicationController
   
   def new
     @recipe = Recipe.new
+    @course = Course.new
+    @courses = Course.all
     
     @start_preparation_time, @start_cooking_time = "1", "1"
     @end_preparation_time, @end_cooking_time = "30", "30"
@@ -50,6 +53,7 @@ class RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
+    @course = @recipe.course
     
     @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
     @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
@@ -65,7 +69,9 @@ class RecipesController < ApplicationController
   end
   
   def create
+    debugger
     @recipe = Recipe.new(params[:recipe])
+    @course = @recipe.build_course(params[:course])
     
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])

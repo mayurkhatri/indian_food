@@ -1,3 +1,12 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#course_form input {
+  width: 250px;
+}
+#course_form .action input {
+  width: 100px;
+  text-align: center;
+  margin-left: 75px;
+}

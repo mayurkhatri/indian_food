@@ -45,13 +45,7 @@
   height: 800px;
   line-height: 1em;
   background-color: white;
-  border-left: 1px solid #F4FCFC;
-  border-top: 1px solid #F4FCFC;
+  border-left: 1px solid #C6CFDE;
   border-right: 1px solid #F4FCFC;
-  border-bottom: 1px solid #F4FCFC;
-}
-
-.container-inner {
-  padding-left: 15px;
-  width: 200%;
+  border-bottom: 1px solid #C6CFDE;
 }

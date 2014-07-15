@@ -59,6 +59,10 @@
     </div>
     </div> <!--- recipe-amounts -->
   </div>   <!--- recipe-detail -->
+  
+  <div class="fields">
+      <%= form.collection_select(:course, Course.all) %>
+  </div>
 
   <div class="fields">
     <%= form.label :preparation_method %><br/>
