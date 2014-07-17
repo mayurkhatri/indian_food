@@ -1,4 +1,4 @@
-<%= form_for @recipe, :html => { :id => "recipe_form", :multipart => true }, :validate => true do |form| %>
+<%= form_for [@recipeable, @recipe], :html => { :id => "recipe_form", :multipart => true }, :validate => true do |form| %>
   <% if @recipe.errors.any? %>
     <div id="error_explaination">
       <h1><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h1>
@@ -61,7 +61,12 @@
   </div>   <!--- recipe-detail -->
   
   <div class="fields">
-      <%= form.collection_select(:course, Course.all) %>
+    <label>Course Name</label>
+    <% if controller.action_name.eql?("edit") %>
+      <%= form.collection_select(:recipeable, Course.all, :id, :name_all, :prompt => true, :selected => @course.name ) %>
+    <% elsif controller.action_name.eql?("new") %>
+      <%= @course.name %>
+    <% end %>
   </div>
 
   <div class="fields">

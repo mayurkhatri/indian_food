@@ -3,9 +3,14 @@ class CoursesController < ApplicationController
   respond_to :html, :xml, :json
   
   def index
+    debugger
     @courses = Course.all
     
-    respond_with @courses
+    if params[:forrecipes].eql?("true")
+      render 'forrecipe_index'
+    else
+      respond_with @courses
+    end
   end
 
   def new

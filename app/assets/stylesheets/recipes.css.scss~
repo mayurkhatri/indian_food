@@ -166,6 +166,7 @@ ol#admin-site-navigation {
     float: right;
     overflow: hidden;
     padding-left: 220px;
+    margin-left: 220px;   
   }
 }
 
@@ -195,5 +196,3 @@ textarea#recipe_preparation_method {
     text-align:center;
     margin-left: 220px;
 }
-
-

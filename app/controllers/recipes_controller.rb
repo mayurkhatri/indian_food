@@ -3,13 +3,22 @@ class RecipesController < ApplicationController
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
   
+  respond_to :html, :xml, :json
+  
   def index
-    @recipes = Recipe.all
+    debugger
     
-    respond_to do |format|
-      format.html
-      format.json { render json: @recipes }
+    @recipeable = find_recipeable	
+    unless @recipeable.blank?
+      @recipes = @recipeable.recipes
     end
+    if @recipeable.blank?
+      @recipes = Recipe.all
+    end
+   
+    @course = Course.find(params[:course_id])
+     
+    respond_with(@course, @recipes)
   end
   
   def show
@@ -28,15 +37,13 @@ class RecipesController < ApplicationController
     
     @serves = @recipe.serves
     
-    respond_to do |format|
-      format.html
-      format.json { render json: @recipe }
-    end
+    respond_with(@recipe)
   end
   
   def new
+    @recipeable = find_recipeable
     @recipe = Recipe.new
-    @course = Course.new
+    @course = Course.find(params[:course_id])
     @courses = Course.all
     
     @start_preparation_time, @start_cooking_time = "1", "1"
@@ -45,10 +52,7 @@ class RecipesController < ApplicationController
     @end_preparation_time_unit, @end_cooking_time_unit = "minutes", "minutes"
     @serves = "1"
     
-    respond_to do |format|
-      format.html
-      format.json { render json: @recipe }
-    end
+    respond_with(@recipe)
   end
   
   def edit
@@ -66,12 +70,16 @@ class RecipesController < ApplicationController
     @end_cooking_time_unit = @recipe.end_cooking_time >= 60 ? "hours" : "minutes"
     
     @serves = @recipe.serves
+    
+    respond_with(@recipe)
   end
   
   def create
     debugger
-    @recipe = Recipe.new(params[:recipe])
-    @course = @recipe.build_course(params[:course])
+    @recipeable = find_recipeable
+    @recipe = @recipeable.recipes.build(params[:recipe])
+#    @recipe = Recipe.new(params[:recipe])
+    @course = Course.find(params[:course_id])	
     
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
@@ -80,15 +88,8 @@ class RecipesController < ApplicationController
     @recipe.end_cooking_time = Recipe.calculate_minutes(params[:end_cooking_time], params[:end_cooking_time_unit])
     @recipe.serves = params[:serves]
     
-    respond_to do |format|
-      if @recipe.save
-        format.html { redirect_to @recipe, notice: "Recipe was successfully created." }
-        format.json { render json: @recipe, status: :created, location: @recipe }
-      else
-        format.html { render action: "new"}
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
-      end  
-    end
+    flash[:notice] = "Recipe created successfully"  if @recipe.save
+    respond_with(@course)
   end
   
   def update
@@ -100,25 +101,15 @@ class RecipesController < ApplicationController
     @recipe.end_cooking_time = Recipe.calculate_minutes(params[:end_cooking_time], params[:end_cooking_time_unit])
     @recipe.serves = params[:serves]
     
-    respond_to do |format|
-      if @recipe.update_attributes(params[:recipe])
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }  
-      end
-    end
+    flash[:notice] = "Recipe was updated successfully" if Recipe.update_attributes(@recipe)
+    respond_with(@recipe)
   end
   
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
     
-    respond_to do |format|
-      format.html { redirect_to recipes_url }
-      format.json { head :no_content }
-    end
+    respond_with(@recipe)
   end
   
   def set_time
@@ -133,5 +124,14 @@ class RecipesController < ApplicationController
     @end_preparation_time_unit = params[:end_preparation_time_unit]
     @start_cooking_time_unit = params[:start_cooking_time_unit]
     @end_cooking_time_unit = params[:end_cooking_time_unit]
+  end
+  
+  def find_recipeable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
+    end
+    nil
   end
 end

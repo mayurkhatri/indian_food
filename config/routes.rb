@@ -4,11 +4,29 @@ IndianFood::Application.routes.draw do
 
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
   
-  resources :recipes
+  resources :courses do
+    resources :recipes
+  end
   
-  resources :users
+  resources :cuisines do
+    resources :recipes
+  end
   
-  resources :courses
+  resources :ingredients do
+    resources :recipes
+  end
+  
+  resources :dishes do
+    resources :recipes
+  end
+  
+  resources :occassions do
+    resources :recipes
+  end
+  
+  resources :users do
+    resources :recipes
+  end
 
 
   # The priority is based upon order of creation:

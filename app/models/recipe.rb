@@ -6,7 +6,7 @@ class Recipe < ActiveRecord::Base
   validates :start_preparation_time, :end_preparation_time, :start_cooking_time,
     :end_cooking_time, :serves, numericality: { only_integer: true }
 #  validate :start_time_less_than_end_time
-  validates_start_time :start_preparation_time
+ # validates_start_time :start_preparation_time
   
   resourcify
   
@@ -31,16 +31,10 @@ class Recipe < ActiveRecord::Base
    time
   end
   
-  def name
-    "#{Course.name.first}"
-  end
-
-  
   private
   
   def start_time_less_than_end_time
     errors.add(:start_cooking_time, "should be less than end cooking time") if start_cooking_time >= end_cooking_time
     errors.add(:start_preparation_time, "should be less than end preparation time") if start_preparation_time >= end_preparation_time
   end
-  
 end

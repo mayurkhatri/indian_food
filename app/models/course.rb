@@ -6,7 +6,9 @@ class Course < ActiveRecord::Base
  # accepts_nested_attributes_for :recipes
   has_and_belongs_to_many :dishes
   
-  def name
-    "#{name.first}"
+  private
+  
+  def name_all
+    "#{name}"  
   end
 end

@@ -1,0 +1,13 @@
+<h1>Recipes by course</h1>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% unless @courses.blank? %>
+    <% @courses.each do |course|%>
+      <tr>
+        <td><%= link_to course.name, course_recipes_path(course) %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

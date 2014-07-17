@@ -1,26 +1,32 @@
 IndianFood::Application.routes.draw do
   
-  get "courses/index"
-
-  get "courses/new"
-
-  get "courses/show"
-
-  get "courses/edit"
-
-  get "courses/create"
-
-  get "courses/update"
-
-  get "courses/destroy"
-
   match "/admin" => "recipes#index", as: :admin
 
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
   
-  resources :recipes
+  resources :courses do
+    resources :recipes
+  end
   
-  resources :users
+  resources :cuisines do
+    resources :recipes
+  end
+  
+  resources :ingredients do
+    resources :recipes
+  end
+  
+  resources :dishes do
+    resources :recipes
+  end
+  
+  resources :occassions do
+    resources :recipes
+  end
+  
+  resources :users do
+    resources :recipes
+  end
 
 
   # The priority is based upon order of creation:

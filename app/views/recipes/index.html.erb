@@ -1,4 +1,4 @@
-<h1>Recipe List</h1>
+<h1>Recipe List <%= @recipeable %></h1>
 <table>
   <tr>
     <th>Name</th>
@@ -10,9 +10,9 @@
   <% @recipes.each do |recipe| %>  
     <tr>
       <td><%= recipe.name %></td>
-      <td><%= link_to 'Show', recipe_path(recipe) %></td>
-      <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>        
-      <td><%= link_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure? '} %></td>
+      <td><%= link_to 'Show', course_recipe_path(@course, recipe)  %></td>
+      <td><%= link_to 'Edit', edit_course_recipe_path(@course, recipe) %></td>        
+      <td><%= link_to 'Delete', courses_path(@course, recipe) %></td>
     </tr>
   <% end %>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br/>
 
-<%= link_to 'New', new_recipe_path %>
+<%= link_to 'New', new_course_recipe_path(@course) %>
