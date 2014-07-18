@@ -6,8 +6,6 @@ class RecipesController < ApplicationController
   respond_to :html, :xml, :json
   
   def index
-    debugger
-    
     @recipeable = find_recipeable	
     unless @recipeable.blank?
       @recipes = @recipeable.recipes
@@ -15,15 +13,14 @@ class RecipesController < ApplicationController
     if @recipeable.blank?
       @recipes = Recipe.all
     end
-   
-    @course = Course.find(params[:course_id])
      
-    respond_with(@course, @recipes)
+    respond_with(@recipeable, @recipes)
   end
   
   def show
+    @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
-    @course = @recipe.course
+    @course = @recipe.recipeable if @recipe.recipeable.class.name.eql?("Course")
 
     @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
     @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
@@ -42,8 +39,9 @@ class RecipesController < ApplicationController
   
   def new
     @recipeable = find_recipeable
-    @recipe = Recipe.new
-    @course = Course.find(params[:course_id])
+    @recipe = @recipeable.recipes.build
+    debugger
+    @course_name = params[:course_id].blank? ? "" : Course.find(params[:course_id]).name
     @courses = Course.all
     
     @start_preparation_time, @start_cooking_time = "1", "1"
@@ -56,8 +54,10 @@ class RecipesController < ApplicationController
   end
   
   def edit
+    @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
-    @course = @recipe.course
+    @course = @recipe.recipeable if @recipe.recipeable.class.name.eql?("Course")
+    @courses = Course.all
     
     @start_preparation_time = @recipe.start_preparation_time >= 60 ? Recipe.calculate_time(@recipe.start_preparation_time) : @recipe.start_preparation_time
     @end_preparation_time = @recipe.end_preparation_time >= 60 ? Recipe.calculate_time(@recipe.end_preparation_time) : @recipe.end_preparation_time
@@ -75,11 +75,8 @@ class RecipesController < ApplicationController
   end
   
   def create
-    debugger
     @recipeable = find_recipeable
     @recipe = @recipeable.recipes.build(params[:recipe])
-#    @recipe = Recipe.new(params[:recipe])
-    @course = Course.find(params[:course_id])	
     
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
@@ -89,10 +86,11 @@ class RecipesController < ApplicationController
     @recipe.serves = params[:serves]
     
     flash[:notice] = "Recipe created successfully"  if @recipe.save
-    respond_with(@course)
+    respond_with(@recipeable)
   end
   
   def update
+    @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
     @recipe.start_preparation_time = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     @recipe.end_preparation_time = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
@@ -102,14 +100,15 @@ class RecipesController < ApplicationController
     @recipe.serves = params[:serves]
     
     flash[:notice] = "Recipe was updated successfully" if Recipe.update_attributes(@recipe)
-    respond_with(@recipe)
+    respond_with(@recipeable, @recipe)
   end
   
   def destroy
+    @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
     @recipe.destroy
     
-    respond_with(@recipe)
+    respond_with(@recipeable, @recipe)
   end
   
   def set_time

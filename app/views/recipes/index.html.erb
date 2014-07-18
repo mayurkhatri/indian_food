@@ -1,4 +1,4 @@
-<h1>Recipe List <%= @recipeable %></h1>
+<h1>Recipe List <%= unless @recipeable.blank? then @recipeable.name end %></h1>
 <table>
   <tr>
     <th>Name</th>
@@ -10,9 +10,9 @@
   <% @recipes.each do |recipe| %>  
     <tr>
       <td><%= recipe.name %></td>
-      <td><%= link_to 'Show', course_recipe_path(@course, recipe)  %></td>
-      <td><%= link_to 'Edit', edit_course_recipe_path(@course, recipe) %></td>        
-      <td><%= link_to 'Delete', courses_path(@course, recipe) %></td>
+      <td><%= link_to 'Show', polymorphic_path([@recipeable, recipe])  %></td>
+      <td><%= link_to 'Edit', edit_polymorphic_path([@recipeable, recipe]) %></td>        
+      <td><%= link_to 'Delete', polymorphic_path([@recipeable, recipe]), :method => :delete %></td>
     </tr>
   <% end %>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br/>
 
-<%= link_to 'New', new_course_recipe_path(@course) %>
+<%= link_to 'New', new_polymorphic_path([@recipeable, Recipe.new]) %>

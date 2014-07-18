@@ -165,7 +165,7 @@ ol#admin-site-navigation {
     position: absolute;
     float: right;
     overflow: hidden;
-    padding-left: 220px;
+   // padding-left: 220px;
     margin-left: 220px;   
   }
 }

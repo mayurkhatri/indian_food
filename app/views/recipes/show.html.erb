@@ -40,5 +40,5 @@
   </div>
 </p>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<%= link_to 'Edit', edit_polymorphic_path([@recipeable, @recipe]) %> |
+<%= link_to 'Back', polymorphic_path([@recipeable, Recipe.new]) %>

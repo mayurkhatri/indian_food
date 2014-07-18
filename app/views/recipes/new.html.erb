@@ -2,4 +2,4 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', course_recipes_path(@course) %>
+<%= link_to 'Back', polymorphic_path(@recipeable, Recipe.new) %>

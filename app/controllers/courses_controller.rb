@@ -3,7 +3,6 @@ class CoursesController < ApplicationController
   respond_to :html, :xml, :json
   
   def index
-    debugger
     @courses = Course.all
     
     if params[:forrecipes].eql?("true")

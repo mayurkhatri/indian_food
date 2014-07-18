@@ -1,6 +1,6 @@
 IndianFood::Application.routes.draw do
   
-  match "/admin" => "recipes#index", as: :admin
+  match "/admin" => "courses#index", as: :admin
 
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
   
