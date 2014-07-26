@@ -1,0 +1,10 @@
+<%= form_for([:admin, @course], :html => { :id => "course_form" }, :validate => true) do |form| %>
+  <div class="fields">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+  <br/>
+  <div class="action">
+    <%= form.submit %>
+  </div>
+<% end %>

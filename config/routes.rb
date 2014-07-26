@@ -1,33 +1,34 @@
 IndianFood::Application.routes.draw do
-  
-  match "/admin" => "courses#index", as: :admin
 
   devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
-  
-  resources :courses do
-    resources :recipes
-  end
-  
-  resources :cuisines do
-    resources :recipes
-  end
-  
-  resources :ingredients do
-    resources :recipes
-  end
-  
-  resources :dishes do
-    resources :recipes
-  end
-  
-  resources :occassions do
-    resources :recipes
-  end
-  
-  resources :users do
-    resources :recipes
-  end
+    match "/admin" => "admin/courses#index", as: :admin
+  namespace :admin do
 
+
+    resources :courses do
+      resources :recipes
+    end
+  
+    resources :cuisines do
+      resources :recipes
+    end
+  
+    resources :ingredients do
+      resources :recipes
+    end
+  
+    resources :dishes do
+      resources :recipes
+    end
+  
+    resources :occassions do
+      resources :recipes
+    end
+  
+    resources :users do
+      resources :recipes
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

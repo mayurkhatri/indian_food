@@ -1,0 +1,61 @@
+<%= form_for([:admin, @recipe], :url => polymorphic_path([:admin, @recipeable, @recipe]), :html => { :id => "recipe_form", :multipart => true }, :validate => true) do |form| %>
+
+  <div class="fields">
+    <%= form.label :name %><br/>
+    <%= form.text_field :name %>
+  </div>
+  
+  <div class="fields">
+    <%= form.label :information %><br/>
+    <%= form.text_area :information, size: "50x3" %>
+  </div>
+
+  <div id="recipe-details">
+    <div id="image-container">  
+      <% if controller.action_name.eql?("edit") %>
+        <%= image_tag @recipe.image_url(:thumb).to_s %>
+      <% end%>
+      <%= form.file_field :image %>
+    </div>
+
+    <div id="recipe-amounts">    
+    <div id="prep-time">  
+      <label>Preparation Time</label>
+      <p id="preparation_time">
+        <%= select_tag "start_preparation_time", start_preparation_time %>
+        <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
+        <label>&nbsp &nbsp to &nbsp &nbsp</label>
+        <%= select_tag "end_preparation_time", end_preparation_time %>
+        <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
+        <label id="error_preparation_time"></label>
+      </p>
+    </div>
+
+    <div id="cooking-time">
+      <label>Cooking Time</label>
+      <p id="cooking_time">
+        <%= select_tag "start_cooking_time", start_cooking_time %>
+        <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
+        <label>&nbsp &nbsp to &nbsp &nbsp</label>
+        <%= select_tag "end_cooking_time", end_cooking_time %>
+        <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
+        <label id="error_cooking_time"></label>
+      </p>
+    </div>
+    
+    <div class="fields">
+      <%= form.label :serves %><br/>
+      <%= select_tag "serves", serves %>  
+    </div>
+    </div> <!--- recipe-amounts -->
+  </div>   <!--- recipe-detail -->
+  
+  <div class="fields">
+    <%= form.label :preparation_method %><br/>
+    <%= form.text_area :preparation_method, size: "50x15" %>
+  </div>
+  
+  <div class="action">
+    <%= form.submit %>
+  </div>
+<% end %>

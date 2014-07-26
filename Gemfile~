@@ -28,6 +28,11 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'client_side_validations'
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'rails_best_practices'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
