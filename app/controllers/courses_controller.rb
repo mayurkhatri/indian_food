@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_user!
+  layout 'application'
   respond_to :html, :xml, :json
   
   def index

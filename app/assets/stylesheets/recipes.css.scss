@@ -86,7 +86,7 @@ div {
   white-space: pre-warp;
 }
 
-#signout_link {
+.links {
   float: right;
   font-size: 110%;
   width:50%;
@@ -101,6 +101,16 @@ div {
   padding-left:10%;
 }
 
+div#usersite_link{
+  float:right;
+  font-size: 110%;
+  width:9%;
+  text-align:center;
+  margin-top: 4px;
+  margin-right: 10%;
+  margin-left: 100px;
+}
+
 #error_messages {
   color: #ff0000;
 }
@@ -110,6 +120,10 @@ div {
   #banner-heading {
     font-size: 50px;
     font-family: 'Times New Roman';
+    margin-top: 10px;
+    top: 0;
+    left: 0;
+    postion: relative;
   }
 }
 
@@ -165,7 +179,6 @@ ol#admin-site-navigation {
     position: absolute;
     float: right;
     overflow: hidden;
-   // padding-left: 220px;
     margin-left: 220px;   
   }
 }

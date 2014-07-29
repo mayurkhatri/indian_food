@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   after_filter :include_role, only: :create
+  layout 'admin'
   
   def index
     @users = User.all

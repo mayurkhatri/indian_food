@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  layout :layout_by_resource
+#  layout :layout_by_resource
   
   protected
   
@@ -12,5 +12,6 @@ class ApplicationController < ActionController::Base
         return "application"
       end
     end
+    return "application"
   end
 end

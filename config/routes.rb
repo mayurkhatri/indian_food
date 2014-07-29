@@ -1,16 +1,21 @@
 IndianFood::Application.routes.draw do
 
-  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }
+  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :controllers => { :sessions => "IfSessions"}
     match "/admin" => "admin/courses#index", as: :admin
+    
+  devise_scope :user do 
+    get 'signin', :to => 'if_sessions#sign_in', :as => 'signin'
+  end
+  
+  resources :users
+
   namespace :admin do
-
-
     resources :courses do
       resources :recipes
     end
   
     resources :cuisines do
-      resources :recipes
+      resources :recipe
     end
   
     resources :ingredients do

@@ -68,6 +68,8 @@ $(document).ready(function(){
       minutes_array.push(i);
     }
   }
+  
+//  $("#recipe-by-group").hide();
 
   // start_preparation_time_unit change  
   $("#start_preparation_time_unit").change(function(){

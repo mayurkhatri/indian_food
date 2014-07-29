@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
+  layout 'application'
   
   respond_to :html, :xml, :json
   

@@ -2,6 +2,7 @@ class Admin::RecipesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
+  layout 'admin'
   
   respond_to :html, :xml, :json
   
