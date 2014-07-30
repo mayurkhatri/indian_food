@@ -55,7 +55,6 @@ class Admin::RecipesController < ApplicationController
   end
   
   def edit
-    debugger
     @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
     @course = @recipe.recipeable if @recipe.recipeable.class.name.eql?("Course")

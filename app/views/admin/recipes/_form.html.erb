@@ -22,10 +22,10 @@
     <div id="prep-time">  
       <label>Preparation Time</label>
       <p id="preparation_time">
-        <%= select_tag "start_preparation_time", start_preparation_time %>
+        <%= form.select :start_preparation_time, start_preparation_time %>
         <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
         <label>&nbsp &nbsp to &nbsp &nbsp</label>
-        <%= select_tag "end_preparation_time", end_preparation_time %>
+        <%= form.select :end_preparation_time, end_preparation_time %>
         <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
         <label id="error_preparation_time"></label>
       </p>
@@ -34,10 +34,10 @@
     <div id="cooking-time">
       <label>Cooking Time</label>
       <p id="cooking_time">
-        <%= select_tag "start_cooking_time", start_cooking_time %>
+        <%= form.select :start_cooking_time, start_cooking_time %>
         <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
         <label>&nbsp &nbsp to &nbsp &nbsp</label>
-        <%= select_tag "end_cooking_time", end_cooking_time %>
+        <%= form.select :end_cooking_time, end_cooking_time %>
         <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
         <label id="error_cooking_time"></label>
       </p>
@@ -45,7 +45,7 @@
     
     <div class="fields">
       <%= form.label :serves %><br/>
-      <%= select_tag "serves", serves %>  
+      <%= form.select :serves, serves %>  
     </div>
     </div> <!--- recipe-amounts -->
   </div>   <!--- recipe-detail -->

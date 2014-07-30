@@ -9,7 +9,7 @@ class Admin::CoursesController < ApplicationController
     if params[:forrecipes].eql?("true")
       render 'forrecipe_index'
     else
-      respond_with @courses
+      respond_with(:admin, @courses)
     end
   end
 
@@ -22,33 +22,33 @@ class Admin::CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     
-    respond_with(@course)
+    respond_with(:admin, @course)
   end
 
   def edit
     @course = Course.find(params[:id])
     
-    respond_with(@course)
+    respond_with(:admin, @course)
   end
 
   def create
     @course = Course.new(params[:course])
     
     flash[:notice] = "Course was successfully created" if @course.save
-    respond_with(@course)    
+    respond_with(:admin, @course)    
   end
 
   def update
     @course = Course.find(params[:id])
     
-    flash[:notice] = "Course was updated successfully" if Course.update_attributes(@course)
-    respond_with(@course)
+    flash[:notice] = "Course was updated successfully" if @course.update_attributes(params[:course])
+    respond_with(:admin, @course)
   end
 
   def destroy
     @course = Course.find(params[:id])
     @course.destroy
     
-    respond_with(@course)
+    respond_with(:admin, @course)
   end
 end
