@@ -11,7 +11,6 @@
 <div id="home_link">
   <%= link_to 'Home' %>
 </div>
-<div></div>
 <div id="signout_link" class="links">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>.Not you?
@@ -25,11 +24,11 @@
 </div>
 <div id="signin_link" class="links">
   <% unless user_signed_in? %>
-    <%= link_to 'Sign in', signin_path, {:remote => true, 'data-toggle' => 'modal', 'data-target' => '#modal-window' }%>
+    <%= link_to 'Sign in', sign_in_modal_path, {:remote => true, 'data-toggle' => 'modal', 'data-target' => '#modal-window' }%>
   <% end %>
 </div>
-<%= render "devise/sessions/sign_in"%>
-
+<%= render "devise/sessions/sign_in_modal"%>
+</div>
 <p>
   <div id="notice">
     <p class="notice"><%= notice %></p>

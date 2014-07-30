@@ -1,10 +1,10 @@
 IndianFood::Application.routes.draw do
 
-  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :controllers => { :sessions => "sessions"}
+  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :controllers => { :sessions => "sessions" }
   match "/admin" => "admin/courses#index", as: :admin
     
   devise_scope :user do 
-    get 'signin', :to => 'sessions#sign_in', :as => 'signin'
+    get 'sign_in_modal', :to => 'sessions#sign_in_modal', :as => 'sign_in_modal'
   end
   
   namespace :admin do

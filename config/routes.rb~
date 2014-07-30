@@ -4,7 +4,7 @@ IndianFood::Application.routes.draw do
   match "/admin" => "admin/courses#index", as: :admin
     
   devise_scope :user do 
-    get 'signin', :to => 'sessions#sign_in', :as => 'signin'
+    get 'sign_in_modal', :to => 'sessions#sign_in_modal', :as => 'sign_in_modal'
   end
   
   namespace :admin do
