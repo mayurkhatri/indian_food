@@ -28,10 +28,6 @@
     <%= link_to 'Sign in', signin_path, {:remote => true, 'data-toggle' => 'modal', 'data-target' => '#modal-window' }%>
   <% end %>
 </div>
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-window">
-  Launch demo modal
-</button>
-
 <%= render "devise/sessions/sign_in"%>
 
 <p>
