@@ -10,6 +10,11 @@ class Admin::RecipesController < ApplicationController
     @recipeable = find_recipeable	
     unless @recipeable.blank?
       @recipes = @recipeable.recipes
+      if @recipeable.is_a?User
+        @recipeable_name = @recipeable.email
+      else
+        @recipeable_name = @recipeable.name
+      end
     end
     if @recipeable.blank?
       @recipes = Recipe.all
@@ -41,9 +46,8 @@ class Admin::RecipesController < ApplicationController
   def new
     @recipeable = find_recipeable
     @recipe = @recipeable.recipes.build
-    debugger
     @course_name = params[:course_id].blank? ? "" : Course.find(params[:course_id]).name
-    @courses = Course.all
+    @course_id = params[:course_id].blank? ? "" : params[:course_id]
     
     @start_preparation_time, @start_cooking_time = "1", "1"
     @end_preparation_time, @end_cooking_time = "30", "30"
@@ -58,7 +62,7 @@ class Admin::RecipesController < ApplicationController
     @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
     @course = @recipe.recipeable if @recipe.recipeable.class.name.eql?("Course")
-    @courses = Course.all
+    @course_id = params[:course_id].blank? ? "" : params[:course_id]
     recipe_start_preparation_time = @recipe.start_preparation_time
     recipe_end_preparation_time = @recipe.end_preparation_time
     recipe_start_cooking_time = @recipe.start_cooking_time
@@ -91,12 +95,17 @@ class Admin::RecipesController < ApplicationController
     params[:recipe][:serves] = params[:serves]
     
     flash[:notice] = "Recipe created successfully"  if @recipe.save
-    respond_with(:admin, @recipeable)
+    respond_with(:admin, @recipeable, @recipe)
   end
   
   def update
     @recipeable = find_recipeable
     @recipe = Recipe.find(params[:id])
+    debugger    
+    unless params[:recipe_course].blank?
+      @recipe.recipeable_id = params[:recipe_course]
+    end
+    debugger
     params[:recipe][:start_preparation_time] = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     params[:recipe][:end_preparation_time] = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
     

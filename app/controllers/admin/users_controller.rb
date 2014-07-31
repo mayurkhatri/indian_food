@@ -1,17 +1,20 @@
 class Admin::UsersController < ApplicationController
   after_filter :include_role, only: :create
   layout 'admin'
+  respond_to :html, :xml, :json
   
   def index
     @users = User.all
     
-    respond_to do |format|
-      format.html
-      format.json { render json: @users }
+    if params[:forrecipes].eql?("true")
+      render 'forrecipe_index'
+    else
+      respond_with(:admin, @users)
     end
   end
 
   def new
+    
   end
   
   def create

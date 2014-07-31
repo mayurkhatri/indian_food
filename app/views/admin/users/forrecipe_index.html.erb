@@ -1,0 +1,13 @@
+<h1>Recipes by users</h1>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% unless @users.blank? %>
+    <% @users.each do |user|%>
+      <tr>
+        <td><%= link_to user.email, admin_user_recipes_path(user) %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

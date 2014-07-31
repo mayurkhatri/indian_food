@@ -16,7 +16,7 @@ class Admin::CoursesController < ApplicationController
   def new
     @course = Course.new
     
-    respond_with(@course)
+    respond_with(:admin, @course)
   end
 
   def show

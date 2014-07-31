@@ -1,5 +1,11 @@
 module RecipesHelper
   protected 
+  def all_courses
+    courses = Course.all.each.map { |course| course.name }
+    course_ids = Course.all.each.map { |course| course.id}
+    options_for_select(courses.zip(course_ids), @course_id)
+  end
+  
   def start_preparation_time_unit
     options_for_select([["minutes", "minutes"], ["hours", "hours"]], @start_preparation_time_unit)
   end

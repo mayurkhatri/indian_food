@@ -3,8 +3,8 @@ class Recipe < ActiveRecord::Base
   validates :name, :uniqueness => { :message => "Name already taken"}
   validates :name, :presence => { :message => "This field is required" }
   validates :information, :name, :preparation_method, :presence => { :message => "This field is required" }
-  validates :start_preparation_time, :end_preparation_time, :start_cooking_time,
-    :end_cooking_time, :serves, numericality: { only_integer: true }
+#  validates :start_preparation_time, :end_preparation_time, :start_cooking_time,
+#    :end_cooking_time, :serves, numericality: { only_integer: true }
 #  validate :start_time_less_than_end_time
  # validates_start_time :start_preparation_time
   
