@@ -1,9 +1,11 @@
 class Admin::CoursesController < ApplicationController
   before_filter :authenticate_user!
   layout 'admin'
+  cache_sweeper :course_sweeper
   respond_to :html, :xml, :json
   
   def index
+    debugger
     @courses = Course.all
     
     if params[:forrecipes].eql?("true")

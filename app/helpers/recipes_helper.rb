@@ -26,7 +26,7 @@ module RecipesHelper
   def end_preparation_time
     if @end_preparation_time_unit.eql?("minutes")
       time_values = (1..55).select do |i| i%5 == 0 end
-    elsif 
+    elsif @end_preparation_time_unit.eql?("hours") 
       time_values = (1..10)
     end
     options_for_select(time_values.zip(time_values), @end_preparation_time)
