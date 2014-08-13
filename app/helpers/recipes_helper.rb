@@ -20,6 +20,7 @@ module RecipesHelper
     elsif @start_preparation_time_unit.eql?("hours")
       time_values = (1..10)      
     end
+    debugger
     options_for_select(time_values.zip(time_values), @start_preparation_time)
   end
   

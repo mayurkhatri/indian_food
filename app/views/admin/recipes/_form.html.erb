@@ -14,7 +14,7 @@
     <div id="recipe-course-details">
       <label></label>
       <% if controller.action_name.eql?("new")%>
-        <%= @course_name %>
+        <%= course_name %>
       <% elsif controller.action_name.eql?("edit") %>
         <% cache("all_available_courses") do %>
           <%= select_tag "recipe_course", all_courses %>
