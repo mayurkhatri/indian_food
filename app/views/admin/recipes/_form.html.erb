@@ -1,4 +1,4 @@
-<%= form_for([:admin, @recipe], :url => polymorphic_path([:admin, @recipeable, @recipe]), :html => { :id => "recipe_form", :multipart => true }, :validate => true) do |form| %>
+<%= form_for([:admin, recipe], :url => polymorphic_path([:admin, recipeable, recipe]), :html => { :id => "recipe_form", :multipart => true }, :validate => true) do |form| %>
 
   <div class="fields">
     <%= form.label :name %><br/>
@@ -23,7 +23,7 @@
     </div>
     <div id="image-container">  
       <% if controller.action_name.eql?("edit") %>
-        <%= image_tag @recipe.image_url(:thumb).to_s %>
+        <%= image_tag recipe.image_url(:thumb).to_s %>
       <% end%>
       <%= form.file_field :image %>
     </div>

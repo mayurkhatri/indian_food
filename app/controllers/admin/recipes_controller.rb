@@ -2,7 +2,7 @@ class Admin::RecipesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
-#  before_filter :set_initial_values, :only => [:new]
+  before_filter :set_initial_values, :only => [:new]
   layout 'admin'
   
   respond_to :html, :xml, :json
@@ -37,7 +37,7 @@ class Admin::RecipesController < ApplicationController
     @recipe = @recipeable.recipes.build
     @course_name = params[:course_id].blank? ? "" : Course.find(params[:course_id]).name
     @course_id = params[:course_id].blank? ? "" : params[:course_id]
-    debugger
+   # debugger
     respond_with(:admin, @recipe)
   end
   
@@ -59,10 +59,7 @@ class Admin::RecipesController < ApplicationController
   def create
     @recipeable = find_recipeable
     @recipe = @recipeable.recipes.build(params[:recipe])
-    
-    calculate_start_and_end_time    
-    params[:recipe][:serves] = params[:serves]
-    
+    debugger
     flash[:notice] = "Recipe created successfully"  if @recipe.save
     respond_with(:admin, @recipeable, @recipe)
   end
@@ -73,8 +70,6 @@ class Admin::RecipesController < ApplicationController
     unless params[:recipe_course].blank?
       @recipe.recipeable_id = params[:recipe_course]
     end
-    calculate_start_and_end_time
-    params[:recipe][:serves] = params[:serves]
     flash[:notice] = "Recipe was updated successfully" if @recipe.update_attributes(params[:recipe])
     respond_with(:admin, @recipeable, @recipe)
   end
@@ -113,6 +108,7 @@ class Admin::RecipesController < ApplicationController
   end
   
   def calculate_start_and_end_time
+    debugger
     params[:recipe][:start_preparation_time] = Recipe.calculate_minutes(params[:start_preparation_time], params[:start_preparation_time_unit])
     params[:recipe][:end_preparation_time] = Recipe.calculate_minutes(params[:end_preparation_time], params[:end_preparation_time_unit])
     
@@ -135,7 +131,6 @@ class Admin::RecipesController < ApplicationController
   end
   
   def set_initial_values
-    debugger
     @start_preparation_time, @start_cooking_time = "1", "1"
     @end_preparation_time, @end_cooking_time = "30", "30"
     @start_preparation_time_unit, @start_cooking_time_unit = "minutes", "minutes"

@@ -1,6 +1,6 @@
 IndianFood::Application.routes.draw do
 
-  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :controllers => { :sessions => "sessions"}
+  devise_for :users, :path => '', :path_names => { :sign_in => 'login', :sign_out => 'logout' }, :controllers => { :sessions => "sessions" }
   match "/admin" => "admin/courses#index", as: :admin
     
   devise_scope :user do 
@@ -28,7 +28,7 @@ IndianFood::Application.routes.draw do
       resources :recipes
     end
   
-    resources :users do
+    resources :users, :only => [:create, :index] do
       resources :recipes
     end
   end

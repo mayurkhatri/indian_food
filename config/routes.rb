@@ -28,7 +28,7 @@ IndianFood::Application.routes.draw do
       resources :recipes
     end
   
-    resources :users do
+    resources :users, :only => [:create, :index] do
       resources :recipes
     end
   end

@@ -17,11 +17,6 @@ class Recipe < ActiveRecord::Base
   
   mount_uploader :image, ImageUploader
   
-  def initialize
-    debugger
-    @start_preparation_time, @start_cooking_time = "1", "1"
-  end
-  
   def self.calculate_minutes(time, unit)
     if unit.eql?("hours")
       minutes = (time.to_i * 60)
@@ -67,12 +62,5 @@ class Recipe < ActiveRecord::Base
   
   def self.find_course(recipeable)
     recipeable if recipeable.class.name.eql?("Course")
-  end
-  
-  private
-  
-  def start_time_less_than_end_time
-    errors.add(:start_cooking_time, "should be less than end cooking time") if start_cooking_time >= end_cooking_time
-    errors.add(:start_preparation_time, "should be less than end preparation time") if start_preparation_time >= end_preparation_time
   end
 end

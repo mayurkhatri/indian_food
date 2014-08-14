@@ -5,10 +5,4 @@ class Course < ActiveRecord::Base
   has_many :recipes, :as => :recipeable
  # accepts_nested_attributes_for :recipes
   has_and_belongs_to_many :dishes
-  
-  private
-  
-  def name_all
-    "#{name}"  
-  end
 end
