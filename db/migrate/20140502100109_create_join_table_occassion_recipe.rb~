@@ -6,6 +6,6 @@ class CreateJoinTableOccassionRecipe < ActiveRecord::Migration
       
       t.timestamps
     end
-      add_index(:occassions_recipes, [:occassion_id, :recipe_id])
+      add_index:occassions_recipes, [:occassion_id, :recipe_id]
   end
 end

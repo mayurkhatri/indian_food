@@ -4,7 +4,7 @@ class CreateJoinTableDishRecipe < ActiveRecord::Migration
       t.references :dish, :null => false
       t.references :recipe, :null => false
     end
-    
-    add_index(:dishes_recipes, [:dish_id, :recipe_id])    
+
+    add_index(:dishes_recipes, [:dish_id, :recipe_id])
   end
 end

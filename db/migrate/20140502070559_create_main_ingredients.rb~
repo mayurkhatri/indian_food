@@ -9,6 +9,6 @@ class CreateMainIngredients < ActiveRecord::Migration
     end
     
     # TODO add a index according to what data is going to be fetched on UI
-    add_index :main_ingredients, [:ingredient_id :recipe_id]
+    add_index :main_ingredients, [:ingredient_id, :recipe_id]
   end
 end

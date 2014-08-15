@@ -7,16 +7,16 @@ class Recipe < ActiveRecord::Base
 #    :end_cooking_time, :serves, numericality: { only_integer: true }
 #  validate :start_time_less_than_end_time
  # validates_start_time :start_preparation_time
-  
+
   resourcify
-  
+
   has_and_belongs_to_many :dishes
   belongs_to :recipeable, polymorphic: true
   has_many :ingredients, through: :main_ingredients
   has_and_belongs_to_many :occassions
-  
+
   mount_uploader :image, ImageUploader
-  
+
   def self.calculate_minutes(time, unit)
     if unit.eql?("hours")
       minutes = (time.to_i * 60)
@@ -25,12 +25,12 @@ class Recipe < ActiveRecord::Base
     end
     minutes
   end
-  
+
   def self.calculate_time(minutes)
    time = minutes.blank? ? 0 : (minutes / 60)
    time
   end
-  
+
   def self.find_recipeable_name(recipeable)
     if recipeable.is_a?User
       return recipeable.email
@@ -38,7 +38,7 @@ class Recipe < ActiveRecord::Base
       return recipeable.name
     end
   end
-  
+
   def self.set_preparation_time_and_timeunit(recipe)
     puts "=========== In model ================="
     preparation_time_and_timeunit = Hash.new
@@ -49,7 +49,7 @@ class Recipe < ActiveRecord::Base
     preparation_time_and_timeunit[:end_preparation_time_unit] = recipe.end_preparation_time >= 60 ? "hours" : "minutes"
     preparation_time_and_timeunit
   end
-  
+
   def self.set_cooking_time_and_timeunit(recipe)
     # set cooking time and cooking time unit
     cooking_time_and_timeunit = Hash.new
@@ -59,7 +59,7 @@ class Recipe < ActiveRecord::Base
     cooking_time_and_timeunit[:end_cooking_time_unit] = recipe.end_cooking_time >= 60 ? "hours" : "minutes"
     cooking_time_and_timeunit
   end
-  
+
   def self.find_course(recipeable)
     recipeable if recipeable.class.name.eql?("Course")
   end

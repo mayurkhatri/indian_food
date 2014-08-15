@@ -4,7 +4,7 @@ class AddRecipeableToRecipe < ActiveRecord::Migration
       t.references :recipeable, polymorphic: true
     end
   end
-  
+
   def self.down
     change_table :recipes do |t|
       t.remove_references :recipeable, polymorphic: true

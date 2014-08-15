@@ -28,7 +28,7 @@
   <% end %>
 </div>
 <%= render "devise/sessions/sign_in_modal"%>
-
+</div>
 <p>
   <div id="notice">
     <p class="notice"><%= notice %></p>

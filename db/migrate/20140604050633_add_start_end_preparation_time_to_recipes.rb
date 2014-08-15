@@ -4,7 +4,7 @@ class AddStartEndPreparationTimeToRecipes < ActiveRecord::Migration
     add_column :recipes, :start_preparation_time, :integer, :default => 0
     add_column :recipes, :end_preparation_time, :integer, :default => 0
   end
-  
+
   def down
     add_column :recipes, :preparation_time, :integer
     remove_column :recipes, :start_preparation_time

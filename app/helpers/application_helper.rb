@@ -1,4 +1,5 @@
 module ApplicationHelper
+  # Methods written while implementing pop up for device sign in
   def resource_name
     :user
   end

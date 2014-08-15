@@ -4,7 +4,7 @@
     <%= form.label :name %><br/>
     <%= form.text_field :name %>
   </div>
-  
+
   <div class="fields">
     <%= form.label :information %><br/>
     <%= form.text_area :information, size: "50x3" %>
@@ -21,15 +21,15 @@
         <% end %>
       <% end %>
     </div>
-    <div id="image-container">  
+    <div id="image-container">
       <% if controller.action_name.eql?("edit") %>
         <%= image_tag recipe.image_url(:thumb).to_s %>
       <% end%>
       <%= form.file_field :image %>
     </div>
 
-    <div id="recipe-amounts">    
-    <div id="prep-time">  
+    <div id="recipe-amounts">
+    <div id="prep-time">
       <label>Preparation Time</label>
       <p id="preparation_time">
         <%= form.select :start_preparation_time, start_preparation_time %>
@@ -52,19 +52,19 @@
         <label id="error_cooking_time"></label>
       </p>
     </div>
-    
+
     <div class="fields">
       <%= form.label :serves %><br/>
-      <%= form.select :serves, serves %>  
+      <%= form.select :serves, serves %>
     </div>
     </div> <!--- recipe-amounts -->
   </div>   <!--- recipe-detail -->
-  
+
   <div class="fields">
     <%= form.label :preparation_method %><br/>
     <%= form.text_area :preparation_method, size: "50x15" %>
   </div>
-  
+
   <div class="action">
     <%= form.submit %>
   </div>

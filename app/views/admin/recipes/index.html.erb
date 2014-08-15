@@ -4,14 +4,14 @@
     <th>Name</th>
     <th></th>
     <th></th>
-    <th></th>    
+    <th></th>
   </tr>
-<% unless @recipes.blank? %>  
-  <% @recipes.each do |recipe| %>  
+<% unless @recipes.blank? %>
+  <% @recipes.each do |recipe| %>
     <tr>
       <td><%= recipe.name %></td>
       <td><%= link_to 'Show', polymorphic_path([:admin, @recipeable, recipe])  %></td>
-      <td><%= link_to 'Edit', edit_polymorphic_path([:admin, @recipeable, recipe]) %></td>        
+      <td><%= link_to 'Edit', edit_polymorphic_path([:admin, @recipeable, recipe]) %></td>
       <td><%= link_to 'Delete', polymorphic_path([:admin, @recipeable, recipe]), :method => :delete %></td>
     </tr>
   <% end %>
