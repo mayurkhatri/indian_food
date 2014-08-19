@@ -1,103 +1,95 @@
-$(document).ready(function(){
-  var hours_array = [];
-  var minutes_array = [];
-  var hours = "hours"
-  var minutes = "minutes"
-  var start_preparation_time_unit = document.getElementById("start_preparation_time_unit");
-  var end_preparation_time_unit = document.getElementById("end_preparation_time_unit");
-  var end_preparation_time = document.getElementById("end_preparation_time");
-  var start_preparation_time = document.getElementById("start_preparation_time");
-  var start_cooking_time_unit = document.getElementById("start_cooking_time_unit");
-  var end_cooking_time_unit = document.getElementById("end_cooking_time_unit");
-  
-  function appendOptions(array, selectTag){
-    for(var i=0;i<array.length;i++) {
-        var option = document.createElement('option');
-        option.innerHTML = array[i];
-        option.value = array[i];
-        selectTag.appendChild(option);
+$(document).ready(function () {
+    'use strict';
+    var hours_array = [], minutes_array = [];
+    var hours = "hours", minutes = "minutes";
+    var start_preparation_time_unit = document.getElementById("start_preparation_time_unit"), end_preparation_time_unit = document.getElementById("end_preparation_time_unit"), end_preparation_time = document.getElementById("recipe_end_preparation_time"), start_preparation_time = document.getElementById("recipe_start_preparation_time"), start_cooking_time_unit = document.getElementById("start_cooking_time_unit"), end_cooking_time_unit = document.getElementById("end_cooking_time_unit"), start_cooking_time = document.getElementById("recipe_start_cooking_time"), end_cooking_time = document.getElementById("recipe_end_cooking_time");
+    alert(end_preparation_time.val());
+    function appendOptions(array, selectTag) {
+      for (var opt=0;opt<array.length;opt++) {
+          var option = document.createElement("option");
+          option.innerHTML = array[opt];
+          option.value = array[opt];
+          selectTag.appendChild(option);
+      }
+    };
+
+    function applyErrorStyle(element) {
+      $(element).css({'border-color' : 'red', 'border-style' : 'solid', 'border-width' : '1px'});
+    };
+
+    function hideErrorStyle(element) {
+	  $(element).css({'border-color' : '#DCE6F7', 'border-style' : 'none'});
+	};
+
+    function preparationTimeValidation() {
+      var errorString = 'Start time greater than end time';
+      var end_prep_time = parseInt($("#end_preparation_time").val());
+      var start_prep_time = parseInt($("#start_preparation_time").val());
+      if($("#start_preparation_time_unit").val() == $("#end_preparation_time_unit").val()) {
+        if(start_prep_time > end_prep_time) {
+          $("#error_preparation_time").text(errorString);
+        } else if (start_prep_time <= end_prep_time) {
+          $("#error_preparation_time").text("");
+        }
+      }
+    };
+
+    function cookingTimeValidation() {
+      var errorString = "Start time greater than end time";
+      var start_cook_time = parseInt($("#start_cooking_time").val());
+      var end_cook_time = parseInt($("#end_cooking_time").val());
+      if($("#start_cooking_time_unit").val() == $("#end_cooking_time_unit").val()) {
+        if(start_cook_time > end_cook_time) {
+          $("#error_cooking_time").text(errorString);
+        } else if (start_cook_time <= end_cook_time) {
+          $("#error_cooking_time").text("");
+        }
+      }
+    };
+
+    // Hide the notice contents
+    setTimeout(function() {
+      $(".notice").contents().filter(function() {
+        return this.nodeType === 3;
+      }).remove();
+    }, 3000);
+
+    for (var hr=1;hr<=10;hr++) {
+      hours_array.push(hr);
     }
-  };
-  
-  function applyErrorStyle(element){
-    $(element).css({'border-color':'red', 'border-style':'solid','border-width':'1px'});
-  };
-  
-  function hideErrorStyle(element){
-    $(element).css({'border-color':'#DCE6F7','border-style':'none'});
-  };
-  
-  function preparationTimeValidation() {
-    var errorString = "Start time greater than end time";
-    var end_prep_time = parseInt($("#end_preparation_time").val());
-    var start_prep_time = parseInt($("#start_preparation_time").val());
-    if($("#start_preparation_time_unit").val() == $("#end_preparation_time_unit").val()) {
-      if(start_prep_time > end_prep_time) { 
-        $("#error_preparation_time").text(errorString);
-      } else if (start_prep_time <= end_prep_time) {
-        $("#error_preparation_time").text("");
+    for (var mi=0;mi<=59;mi++) {
+      if(mi%5 == 0) {
+        minutes_array.push(mi);
       }
     }
-  };
-  
-  function cookingTimeValidation() {
-    var errorString = "Start time greater than end time";
-    var start_cook_time = parseInt($("#start_cooking_time").val());
-    var end_cook_time = parseInt($("#end_cooking_time").val());
-    if($("#start_cooking_time_unit").val() == $("#end_cooking_time_unit").val()) {
-      if(start_cook_time > end_cook_time) {
-        $("#error_cooking_time").text(errorString);
-      } else if (start_cook_time <= end_cook_time) {
-        $("#error_cooking_time").text("");
-      }  
-    }
-  };
 
-  // Hide the notice contents
-  setTimeout(function() {
-    $(".notice").contents().filter(function(){
-      return this.nodeType === 3;
-    }).remove();
-  }, 3000);	
+    // start_preparation_time_unit change
+    $("#start_preparation_time_unit").change(function() {
+      var selected_value = start_preparation_time_unit.options[start_preparation_time_unit.selectedIndex].value;
+      $("#end_preparation_time_unit").val(selected_value);
+      while (end_preparation_time.firstChild) {
+        end_preparation_time.removeChild(end_preparation_time.firstChild);
+      }
+      while(start_preparation_time.firstChild) {
+        start_preparation_time.removeChild(start_preparation_time.firstChild);
+      }
+      if(selected_value === hours) {
+        alert("Selected hours");
+        appendOptions(hours_array, end_preparation_time);
+        appendOptions(hours_array, start_preparation_time);
+      }
 
-  for(var i=1;i<=10;i++) {
-    hours_array.push(i);
-  }
-  for(var i=0;i<=59;i++) {
-    if(i%5 == 0) {
-      minutes_array.push(i);
-    }
-  }
-  
-//  $("#recipe-by-group").hide();
+      if(selected_value == minutes) {
+        appendOptions(minutes_array, end_preparation_time);
+        appendOptions(minutes_array, start_preparation_time);
+      }
+      // reset the error msg
+      $("#error_preparation_time").text("");
+    });
 
-  // start_preparation_time_unit change  
-  $("#start_preparation_time_unit").change(function(){
-
-    var selected_value = start_preparation_time_unit.options[start_preparation_time_unit.selectedIndex].value
-    $("#end_preparation_time_unit").val(selected_value);
-    while (end_preparation_time.firstChild) {
-      end_preparation_time.removeChild(end_preparation_time.firstChild);
-    }
-    while(start_preparation_time.firstChild) {
-      start_preparation_time.removeChild(start_preparation_time.firstChild);
-    }
-    if(selected_value == hours) {
-      appendOptions(hours_array, end_preparation_time)
-      appendOptions(hours_array, start_preparation_time)
-    }
-    
-    if(selected_value == minutes) {
-      appendOptions(minutes_array, end_preparation_time)
-      appendOptions(minutes_array, start_preparation_time)
-    }
-    // reset the error msg
-    $("#error_preparation_time").text("");
-  });  
-  
   // end_preparation_time_unit change
-  $("#end_preparation_time_unit").change(function(){
-    var selected_value = end_preparation_time_unit.options[end_preparation_time_unit.selectedIndex].value
+  $("#end_preparation_time_unit").change(function() {
+    var selected_value = end_preparation_time_unit.options[end_preparation_time_unit.selectedIndex].value;
     if(selected_value == minutes) {
       $("#start_preparation_time_unit").val(selected_value);
       while(end_preparation_time.firstChild) {
@@ -117,10 +109,10 @@ $(document).ready(function(){
     }
     // reset the error msg
     $("#error_preparation_time").text("");
-  });  
-  
+  });
+
   // start_cooking_time_unit change
-  $("#start_cooking_time_unit").change(function(){
+  $("#start_cooking_time_unit").change(function() {
     var selected_value = start_cooking_time_unit.options[start_cooking_time_unit.selectedIndex].value
     if(selected_value == minutes) {
       $("#end_cooking_time_unit").val(selected_value);
@@ -144,15 +136,15 @@ $(document).ready(function(){
       }
       appendOptions(hours_array, end_cooking_time)
     }
-    // reset the error msg    
+    // reset the error msg
     $("#error_cooking_time").text("");
-  });  
-  
+  });
+
   // end_cooking_time_unit change
-  $("#end_cooking_time_unit").change(function(){
+  $("#end_cooking_time_unit").change(function() {
     var selected_value = end_cooking_time_unit.options[end_cooking_time_unit.selectedIndex].value
     if(selected_value == minutes) {
-      $("#start_cooking_time_unit").val(selected_value);    
+      $("#start_cooking_time_unit").val(selected_value);
       while(end_cooking_time.firstChild) {
         end_cooking_time.removeChild(end_cooking_time.firstChild)
       }
@@ -168,68 +160,68 @@ $(document).ready(function(){
       }
       appendOptions(hours_array, end_cooking_time)
     }
-    // reset the error msg    
+    // reset the error msg
     $("#error_cooking_time").text("");
   });
-  
-  $("#start_preparation_time").change(function(){
+
+  $("#recipe_start_preparation_time").change(function() {
     preparationTimeValidation();
   });
-  
-  $("#end_preparation_time").change(function(){
+
+  $("#recipe_end_preparation_time").change(function() {
     preparationTimeValidation();
   });
-  
-  $("#start_cooking_time").change(function() {
+
+  $("#recipe_start_cooking_time").change(function() {
     cookingTimeValidation();
   });
-  
-  $("#end_cooking_time").change(function() {
+
+  $("#recipe_end_cooking_time").change(function() {
     cookingTimeValidation();
   });
-  
-  $("#recipe_name").focusout(function(){
+
+  $("#recipe_name").focusout(function() {
     var val = $(this).val();
     if(val == '') {
       applyErrorStyle(this);
     } else {
-      hideErrorStyle(this);    
+      hideErrorStyle(this);
     }
   });
-  $("#recipe_name").focusin(function(){
+  $("#recipe_name").focusin(function() {
     hideErrorStyle(this);
   });
-  
-  $("#recipe_information").focusout(function(){
+
+  $("#recipe_information").focusout(function() {
     var val = $(this).val();
     if(val == '') {
       applyErrorStyle(this);
     } else {
-      hideErrorStyle(this);    
+      hideErrorStyle(this);
     }
   });
-  $("#recipe_information").focusin(function(){
+  $("#recipe_information").focusin(function() {
     hideErrorStyle(this);
   });
-  
+
   $("#recipe_preparation_method").focusout(function(){
     var val = $(this).val();
     if(val == '') {
       applyErrorStyle(this);
     } else {
-      hideErrorStyle(this);    
+      hideErrorStyle(this);
     }
   });
-  $("#recipe_preparation_method").focusin(function(){
+  $("#recipe_preparation_method").focusin(function() {
     hideErrorStyle(this);
   });
-  $(document).click(function(){
+  $(document).click(function() {
     $("#recipe_information").off("focusout",false);
   });
-  $("input[name='commit']").click(function(){
+  $("input[name='commit']").click(function() {
     $("#recipe_information").on("focusout", false);
   });
-  $("#recipe_form").submit(function(event){
+  $("#recipe_form").submit(function( event ) {
     $("#recipe_information").on("focusout", false);
   });
 });

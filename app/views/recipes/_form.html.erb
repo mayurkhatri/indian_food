@@ -1,31 +1,41 @@
-<%= form_for [@recipeable, @recipe], :html => { :id => "recipe_form", :multipart => true }, :validate => true do |form| %>
+<%= form_for(recipe, :url => polymorphic_path([recipeable, recipe]), :html => { :id => "recipe_form", :multipart => true }, :validate => true) do |form| %>
 
   <div class="fields">
     <%= form.label :name %><br/>
     <%= form.text_field :name %>
   </div>
-  
+
   <div class="fields">
     <%= form.label :information %><br/>
     <%= form.text_area :information, size: "50x3" %>
   </div>
 
   <div id="recipe-details">
-    <div id="image-container">  
+    <div id="recipe-course-details">
+      <label></label>
+      <% if controller.action_name.eql?("new")%>
+        <%= course_name %>
+      <% elsif controller.action_name.eql?("edit") %>
+        <% cache("all_available_courses") do %>
+          <%= select_tag "recipe_course", all_courses %>
+        <% end %>
+      <% end %>
+    </div>
+    <div id="image-container">
       <% if controller.action_name.eql?("edit") %>
-        <%= image_tag @recipe.image_url(:thumb).to_s %>
+        <%= image_tag recipe.image_url(:thumb).to_s %>
       <% end%>
       <%= form.file_field :image %>
     </div>
 
-    <div id="recipe-amounts">    
-    <div id="prep-time">  
+    <div id="recipe-amounts">
+    <div id="prep-time">
       <label>Preparation Time</label>
       <p id="preparation_time">
-        <%= select_tag "start_preparation_time", start_preparation_time %>
+        <%= form.select :start_preparation_time, start_preparation_time %>
         <%= select_tag "start_preparation_time_unit", start_preparation_time_unit %>
         <label>&nbsp &nbsp to &nbsp &nbsp</label>
-        <%= select_tag "end_preparation_time", end_preparation_time %>
+        <%= form.select :end_preparation_time, end_preparation_time %>
         <%= select_tag "end_preparation_time_unit", end_preparation_time_unit %>
         <label id="error_preparation_time"></label>
       </p>
@@ -34,37 +44,27 @@
     <div id="cooking-time">
       <label>Cooking Time</label>
       <p id="cooking_time">
-        <%= select_tag "start_cooking_time", start_cooking_time %>
+        <%= form.select :start_cooking_time, start_cooking_time %>
         <%= select_tag "start_cooking_time_unit", start_cooking_time_unit %>
         <label>&nbsp &nbsp to &nbsp &nbsp</label>
-        <%= select_tag "end_cooking_time", end_cooking_time %>
+        <%= form.select :end_cooking_time, end_cooking_time %>
         <%= select_tag "end_cooking_time_unit", end_cooking_time_unit %>
         <label id="error_cooking_time"></label>
       </p>
     </div>
-    
+
     <div class="fields">
       <%= form.label :serves %><br/>
-      <%= select_tag "serves", serves %>  
+      <%= form.select :serves, serves %>
     </div>
     </div> <!--- recipe-amounts -->
   </div>   <!--- recipe-detail -->
-  
-  <div class="fields">
-    <label>Course Name</label>
-    <% if controller.action_name.eql?("edit") %>
-	<!--- Edit -->
-            <%= form.collection_select(:recipeable, @courses, :id, :name_all, :prompt => true, :selected => @course.name) %>
-    <% elsif controller.action_name.eql?("new")%>
-              <%= form.collection_select(:recipeable, @courses, :id, :name_all, :prompt => true, :selected => @course_name) %>
-    <% end %>
-  </div>
 
   <div class="fields">
     <%= form.label :preparation_method %><br/>
     <%= form.text_area :preparation_method, size: "50x15" %>
   </div>
-  
+
   <div class="action">
     <%= form.submit %>
   </div>
