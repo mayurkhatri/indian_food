@@ -1,6 +1,0 @@
-<h1>Edit Recipe</h1>
-
-<%= render 'form', :locals => { @recipe => :recipe, @recipeable => :recipeable } %>
-
-<%= link_to 'Show', polymorphic_path([@recipeable,@recipe]) %> |
-<%= link_to 'Back', polymorphic_path([@recipeable, Recipe.new]) %>
