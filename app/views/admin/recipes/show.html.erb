@@ -1,4 +1,4 @@
-<h1>Show Recipe</h1>
+<h1><%= t('admin.recipe.show_recipe')%></h1>
 <p>
   <%= image_tag @recipe.image_url(:big).to_s%>
   <br/><br/>
@@ -7,7 +7,7 @@
 </p>
 <br/>
 <p>
-  <b>Information</b>
+  <b><%= t('admin.recipe.information') %></b>
   <%= @recipe.information %>
 </p>
 <br/>
@@ -41,5 +41,5 @@
   </div>
 </p>
 
-<%= link_to 'Edit', edit_polymorphic_path([:admin, @recipeable, @recipe]) %> |
-<%= link_to 'Back', polymorphic_path([:admin, @recipeable, Recipe.new]) %>
+<%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, @recipe]) %> |
+<%= link_to t('generic.back'), polymorphic_path([:admin, @recipeable, Recipe.new]) %>

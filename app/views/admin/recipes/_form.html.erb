@@ -13,16 +13,16 @@
   <div id="recipe-details">
     <div id="recipe-course-details">
       <label></label>
-      <% if controller.action_name.eql?("new")%>
+      <% if controller.action_name.eql?( t('admin.recipe.new_method') )   %>
         <%= course_name %>
-      <% elsif controller.action_name.eql?("edit") %>
+      <% elsif controller.action_name.eql?(t('admin.recipe.edit')) %>
         <% cache("all_available_courses") do %>
           <%= select_tag "recipe_course", all_courses %>
         <% end %>
       <% end %>
     </div>
     <div id="image-container">
-      <% if controller.action_name.eql?("edit") %>
+      <% if controller.action_name.eql?(t('admin.recipe.edit')) %>
         <%= image_tag recipe.image_url(:thumb).to_s %>
       <% end%>
       <%= form.file_field :image %>

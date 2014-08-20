@@ -45,4 +45,10 @@ class Admin::CoursesController < ApplicationController
     @course.destroy
     respond_with(:admin, @course)
   end
+
+  def email_recipe
+    debugger
+    @user = User.first
+    UserMailer.send_recipe(@user).deliver
+  end
 end

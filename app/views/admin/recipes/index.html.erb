@@ -1,7 +1,7 @@
 <h1>Recipe List : <%= unless @recipeable.blank? then @recipeable_name end %></h1>
 <table>
   <tr>
-    <th>Name</th>
+    <th><% t('admin.recipe.name')%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,9 +10,9 @@
   <% @recipes.each do |recipe| %>
     <tr>
       <td><%= recipe.name %></td>
-      <td><%= link_to 'Show', polymorphic_path([:admin, @recipeable, recipe])  %></td>
-      <td><%= link_to 'Edit', edit_polymorphic_path([:admin, @recipeable, recipe]) %></td>
-      <td><%= link_to 'Delete', polymorphic_path([:admin, @recipeable, recipe]), :method => :delete %></td>
+      <td><%= link_to t('generic.show'), polymorphic_path([:admin, @recipeable, recipe])  %></td>
+      <td><%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, recipe]) %></td>
+      <td><%= link_to t('generic.delete_method'), polymorphic_path([:admin, @recipeable, recipe]), :method => :delete %></td>
     </tr>
   <% end %>
 <% end %>
@@ -20,4 +20,4 @@
 
 <br/>
 
-<%= link_to 'New', new_polymorphic_path([:admin, @recipeable, Recipe.new]) %>
+<%= link_to t('generic.new_method'), new_polymorphic_path([:admin, @recipeable, Recipe.new]) %>

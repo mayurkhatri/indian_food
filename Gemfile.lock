@@ -162,7 +162,9 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   devise
+  i18n
   jquery-rails
+  mail
   mysql2
   rails (= 3.2.16)
   rails_best_practices

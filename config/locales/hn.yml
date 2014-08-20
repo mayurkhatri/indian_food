@@ -1,23 +1,23 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+hn:
   hello: "Hello world"
   errors:
     messages:
       start_time: "start time should be less than end time"
   devise:
     sessions:
-      signed_in: "Signed in successfully!!"
-  generic:
-      new_method: "New"
-      edit_method: "Edit"
-      delete_method: "Delete"
-      show: "Show"
-      back: "Back"
+      signed_in: "Safaltapurvak Sign in hue"
   admin:
+    generic:
+      new_method: "Naya"
+      edit_method: "Badlain"
+      delete_method: "Khatam"
+      show: "Dikhao"
+      back: "Peeche"
     recipe:
-      name: "Name"
-      new_recipe: "New Recipe"
-      show_recipe: "Show Recipe"
-      information: "Information"
+      name: "Naam"
+      new_recipe: "Nayi Recipe"
+      show_recipe: "Recipe Dekho"
+      information: "Gyaan"
