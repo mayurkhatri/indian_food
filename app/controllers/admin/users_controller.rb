@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   after_filter :include_role, only: :create
   layout 'admin'
+  load_and_authorize_resource
   respond_to :html, :xml, :json
 
   def index

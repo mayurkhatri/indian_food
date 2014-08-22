@@ -10,11 +10,11 @@ en:
     sessions:
       signed_in: "Signed in successfully!!"
   generic:
-      new_method: "New"
-      edit_method: "Edit"
-      delete_method: "Delete"
-      show: "Show"
-      back: "Back"
+    new_method: "New"
+    edit_method: "Edit"
+    delete_method: "Delete"
+    show: "Show"
+    back: "Back"
   admin:
     recipe:
       name: "Name"

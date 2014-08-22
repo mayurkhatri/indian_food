@@ -1,14 +1,18 @@
 class Admin::RecipesController < ApplicationController
   before_filter :authenticate_user!
+#  before_filter :check_role
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
   before_filter :set_initial_values, :only => [:new]
+  before_filter :find_recipeable, :only => [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_filter :build_new_recipe, :only => [:new]  # Override loading of resource in load_and_authorize_resource
+  before_filter :build_recipe, :only => [:create]  # Override loading of resource in load_and_authorize_resource
+  load_and_authorize_resource
   layout 'admin'
 
   respond_to :html, :xml, :json
 
   def index
-    @recipeable = find_recipeable
     if @recipeable.blank?
       @recipes = Recipe.all
     else
@@ -19,8 +23,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def show
-    @recipeable = find_recipeable
-    @recipe = Recipe.find(params[:id])
+#    @recipe = Recipe.find(params[:id])
     recipe = @recipe
     @course = Recipe.find_course(@recipeable)
     preparation_time_and_timeunit = Recipe.set_preparation_time_and_timeunit(recipe)
@@ -32,16 +35,13 @@ class Admin::RecipesController < ApplicationController
   end
 
   def new
-    @recipeable = find_recipeable
-    @recipe = @recipeable.recipes.build
     @course_name = params[:course_id].blank? ? "" : Course.find(params[:course_id]).name
     @course_id = params[:course_id].blank? ? "" : params[:course_id]
     respond_with(:admin, @recipe)
   end
 
   def edit
-    @recipeable = find_recipeable
-    @recipe = Recipe.find(params[:id])
+#    @recipe = Recipe.find(params[:id])
     recipe = @recipe
     @course = Recipe.find_course(@recipeable)
     @course_id = params[:course_id].blank? ? "" : params[:course_id]
@@ -54,15 +54,12 @@ class Admin::RecipesController < ApplicationController
   end
 
   def create
-    @recipeable = find_recipeable
-    @recipe = @recipeable.recipes.build(params[:recipe])
     flash[:notice] = "Recipe created successfully"  if @recipe.save
     respond_with(:admin, @recipeable, @recipe)
   end
 
   def update
-    @recipeable = find_recipeable
-    @recipe = Recipe.find(params[:id])
+ #   @recipe = Recipe.find(params[:id])
     unless params[:recipe_course].blank?
       @recipe.recipeable_id = params[:recipe_course]
     end
@@ -71,8 +68,7 @@ class Admin::RecipesController < ApplicationController
   end
 
   def destroy
-    @recipeable = find_recipeable
-    @recipe = Recipe.find(params[:id])
+  #  @recipe = Recipe.find(params[:id])
     @recipe.destroy
     respond_with(:admin, @recipeable, @recipe)
   end
@@ -82,10 +78,20 @@ class Admin::RecipesController < ApplicationController
   def find_recipeable
     params.each do |name, value|
       if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
+        return @recipeable = $1.classify.constantize.find(value)
       end
     end
     nil
+  end
+
+  # Override loading of resource in load_and_authorize_resource for new
+  def build_new_recipe
+    @recipe = @recipeable.recipes.build
+  end
+
+  # Override loading of resource in load_and_authorize_resource for create
+  def build_recipe
+    @recipe = @recipeable.recipes.build(params[:recipe])
   end
 
   def set_time
@@ -122,5 +128,11 @@ class Admin::RecipesController < ApplicationController
     @start_preparation_time_unit, @start_cooking_time_unit = "minutes", "minutes"
     @end_preparation_time_unit, @end_cooking_time_unit = "minutes", "minutes"
     @serves = "1"
+  end
+
+  def check_role
+    if (!current_user.has_role? :admin) || (!current_user.has_role? :moderator)
+      raise CanCan::AccessDenied
+    end
   end
 end

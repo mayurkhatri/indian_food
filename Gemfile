@@ -29,6 +29,7 @@ gem 'rmagick'
 gem 'client_side_validations'
 gem 'i18n'
 gem 'mail'
+gem 'cancan'
 
 group :development do
   gem 'better_errors'
