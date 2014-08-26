@@ -1,6 +1,6 @@
 class Admin::CoursesController < ApplicationController
   before_filter :authenticate_user!
- # before_filter :check_role
+  before_filter :check_role
   load_and_authorize_resource
   layout 'admin'
   cache_sweeper :course_sweeper
@@ -45,11 +45,5 @@ class Admin::CoursesController < ApplicationController
   def email_recipe
     @user = User.first
     UserMailer.send_recipe(@user).deliver
-  end
-
-  def check_role
-    if (!current_user.has_role? :admin) || (!current_user.has_role? :moderator)
-      raise CanCan::AccessDenied
-    end
   end
 end

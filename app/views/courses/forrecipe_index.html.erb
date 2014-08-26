@@ -6,7 +6,11 @@
   <% unless @courses.blank? %>
     <% @courses.each do |course|%>
       <tr>
-        <td><%= link_to course.name, course_recipes_path(course) %></td>
+        <td>
+          <% if can? :read, Recipe %>
+            <%= link_to course.name, course_recipes_path(course) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   <% end %>

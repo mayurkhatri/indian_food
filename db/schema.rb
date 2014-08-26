@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140712092715) do
+ActiveRecord::Schema.define(:version => 20140822120417) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -20,12 +20,11 @@ ActiveRecord::Schema.define(:version => 20140712092715) do
   end
 
   create_table "courses_dishes", :force => true do |t|
-    t.integer "course_id"
+    t.integer "category_id"
     t.integer "dish_id"
   end
 
-  add_index "courses_dishes", ["course_id", "dish_id"], :name => "index_courses_dishes_on_category_id_and_dish_id"
-  add_index "courses_dishes", ["course_id", "dish_id"], :name => "index_courses_dishes_on_course_id_and_dish_id"
+  add_index "courses_dishes", ["category_id", "dish_id"], :name => "index_courses_dishes_on_category_id_and_dish_id"
 
   create_table "cuisines", :force => true do |t|
     t.string   "name"
@@ -91,7 +90,10 @@ ActiveRecord::Schema.define(:version => 20140712092715) do
     t.integer  "start_cooking_time",     :default => 0
     t.integer  "end_cooking_time",       :default => 0
     t.string   "image"
+    t.integer  "user_id"
   end
+
+  add_index "recipes", ["user_id"], :name => "index_recipes_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

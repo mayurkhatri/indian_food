@@ -9,9 +9,9 @@ IndianFood::Application.routes.draw do
 
   namespace :admin do
     resources :courses do
-	  member do
-	    get "email_recipe"
-	  end
+#	  member do
+#	    get "email_recipe"
+#	  end
       resources :recipes
     end
 

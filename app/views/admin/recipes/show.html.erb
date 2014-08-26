@@ -41,5 +41,7 @@
   </div>
 </p>
 
-<%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, @recipe]) %> |
+<% if can? :update, @recipe %>
+  <%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, @recipe]) %>
+<% end %> |
 <%= link_to t('generic.back'), polymorphic_path([:admin, @recipeable, Recipe.new]) %>

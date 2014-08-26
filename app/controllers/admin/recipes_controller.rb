@@ -1,13 +1,13 @@
 class Admin::RecipesController < ApplicationController
   before_filter :authenticate_user!
-#  before_filter :check_role
+  before_filter :check_role
   before_filter :set_time, :only => [:create, :update]
   before_filter :set_time_unit, :only => [:create, :update]
   before_filter :set_initial_values, :only => [:new]
   before_filter :find_recipeable, :only => [:index, :show, :new, :create, :edit, :update, :destroy]
   before_filter :build_new_recipe, :only => [:new]  # Override loading of resource in load_and_authorize_resource
   before_filter :build_recipe, :only => [:create]  # Override loading of resource in load_and_authorize_resource
-  load_and_authorize_resource
+  load_and_authorize_resource, :nested => :course
   layout 'admin'
 
   respond_to :html, :xml, :json
@@ -128,11 +128,5 @@ class Admin::RecipesController < ApplicationController
     @start_preparation_time_unit, @start_cooking_time_unit = "minutes", "minutes"
     @end_preparation_time_unit, @end_cooking_time_unit = "minutes", "minutes"
     @serves = "1"
-  end
-
-  def check_role
-    if (!current_user.has_role? :admin) || (!current_user.has_role? :moderator)
-      raise CanCan::AccessDenied
-    end
   end
 end

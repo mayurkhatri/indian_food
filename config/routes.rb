@@ -16,7 +16,7 @@ IndianFood::Application.routes.draw do
     end
 
     resources :cuisines do
-      resources :recipe
+      resources :recipes
     end
 
     resources :ingredients do

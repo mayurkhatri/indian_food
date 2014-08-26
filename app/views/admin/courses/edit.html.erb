@@ -2,5 +2,7 @@
 
 <%= render 'form', :course => @course %>
 
-<%= link_to t('generic.show'), admin_course_path %> |
+<% if can? :read, @course %>
+  <%= link_to t('generic.show'), admin_course_path %>
+<% end %> |
 <%= link_to t('generic.back'), admin_courses_path %>

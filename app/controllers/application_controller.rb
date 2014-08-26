@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = :en
   end
+
+  def check_role
+    if (!current_user.has_role? :admin) || (!current_user.has_role? :moderator)
+      raise CanCan::AccessDenied
+    end
+  end
 end

@@ -10,14 +10,27 @@
   <% @courses.each do |course| %>
   <tr>
     <td><%= course.name %></td>
-    <td><%= link_to t('generic.show'), admin_course_path(course) %></td>
-    <td><%= link_to t('generic.edit_method'), edit_admin_course_path(course) %></td>
-    <td><%= link_to t('generic.delete_method'), admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <% if can? :read, course %>
+        <%= link_to t('generic.show'), admin_course_path(course) %>
+      <% end %>
+    </td>
+    <td>
+      <% if can? :update, course %>
+        <%= link_to t('generic.edit_method'), edit_admin_course_path(course) %>
+      <% end %>
+    </td>
+    <td>
+      <% if can? :destroy, course %>
+        <%= link_to t('generic.delete_method'), admin_course_path(course), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 <% end %>
 </table>
 <br/>
 
-<%= link_to t('generic.new_method'), new_admin_course_path %>
-<%# link_to 'Send recipe', email_recipe_admin_course_path(:admin, @courses.first) %>
+<% if can? :create, Course %>
+  <%= link_to t('generic.new_method'), new_admin_course_path %>
+<% end %>

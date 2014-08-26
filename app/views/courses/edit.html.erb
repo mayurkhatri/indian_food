@@ -1,6 +1,7 @@
 <h1>Edit Course</h1>
 
 <%= render 'form', :course => @course %>
-
-<%= link_to 'Show', :course => @course %> |
+<% if can? :read, @course %>
+  <%= link_to 'Show', course_path :course => @course %>
+<% end %> |
 <%= link_to 'Back', courses_path %>

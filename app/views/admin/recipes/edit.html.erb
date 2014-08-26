@@ -2,5 +2,7 @@
 
 <%= render 'form', :recipe => @recipe, :recipeable => @recipeable %>
 
-<%= link_to t('generic.show'), polymorphic_path([:admin, @recipeable,@recipe]) %> |
+<% if can? :read, @recipe %>
+  <%= link_to t('generic.show'), polymorphic_path([:admin, @recipeable,@recipe]) %>
+<% end %> |
 <%= link_to t('generic.back'), polymorphic_path([:admin, @recipeable, Recipe.new]) %>

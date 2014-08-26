@@ -1,6 +1,7 @@
 <h1>Edit Recipe</h1>
 
 <%= render 'form', @recipe => :recipe, @recipeable => :recipeable %>
-
-<%= link_to 'Show', polymorphic_path([@recipeable,@recipe]) %> |
+<% if can? :read, @recipe %>
+  <%= link_to 'Show', polymorphic_path([@recipeable,@recipe]) %>
+<% end %> |
 <%= link_to 'Back', polymorphic_path([@recipeable, Recipe.new]) %>

@@ -10,18 +10,27 @@
   <% @recipes.each do |recipe| %>
     <tr>
       <td><%= recipe.name %></td>
-      <td><%= link_to t('generic.show'), polymorphic_path([:admin, @recipeable, recipe])  %></td>
-      <% if can? :edit, recipe %>
-      <td><%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, recipe]) %></td>
-      <% end %>
-      <% if can? :destroy, recipe %>
-      <td><%= link_to t('generic.delete_method'), polymorphic_path([:admin, @recipeable, recipe]), :method => :delete %></td>
-      <% end %>
+      <td>
+        <% if can? :read, recipe %>
+          <%= link_to t('generic.show'), polymorphic_path([:admin, @recipeable, recipe])  %>
+        <% end %>
+      </td>
+      <td>
+        <% if can? :edit, recipe %>
+          <%= link_to t('generic.edit_method'), edit_polymorphic_path([:admin, @recipeable, recipe]) %>
+        <% end %>
+      </td>
+      <td>
+        <% if can? :destroy, recipe %>
+          <%= link_to t('generic.delete_method'), polymorphic_path([:admin, @recipeable, recipe]), :method => :delete %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 <% end %>
 </table>
-
 <br/>
 
-<%= link_to t('generic.new_method'), new_polymorphic_path([:admin, @recipeable, Recipe.new]) %>
+<% if can? :read, Recipe %>
+  <%= link_to t('generic.new_method'), new_polymorphic_path([:admin, @recipeable, Recipe.new]) %>
+<% end %>

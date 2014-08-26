@@ -34,16 +34,12 @@ class Ability
       can :manage, :all
     elsif user.has_role? :moderator
       can :read, :all
-    else
+    elsif user.has_role? :site_user
       can :read, Course
       can :read, Recipe
+      can :create, Recipe
       can :update, Recipe do |recipe|
-        if recipe.try(:recipeable).is_a? User
-          user = recipe.try(:recipeable).
-          recipe.try(:recipeable) == user
-        else
-          false
-        end
+        recipe.try(:user) == user
       end
       can :destroy, Recipe do |recipe|
         recipe.try(:user) == user
