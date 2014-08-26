@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_role
-    if (!current_user.has_role? :admin) || (!current_user.has_role? :moderator)
+    if (current_user.has_role? :site_user)
       raise CanCan::AccessDenied
     end
   end
