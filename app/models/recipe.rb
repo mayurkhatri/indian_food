@@ -11,8 +11,9 @@ class Recipe < ActiveRecord::Base
   resourcify
 
   has_and_belongs_to_many :dishes
-  belongs_to :recipeable, polymorphic: true
+#  belongs_to :recipeable, polymorphic: true
   belongs_to :user
+  belongs_to :course
   has_many :ingredients, through: :main_ingredients
   has_and_belongs_to_many :occassions
 

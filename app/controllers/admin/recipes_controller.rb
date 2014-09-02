@@ -7,7 +7,7 @@ class Admin::RecipesController < ApplicationController
   before_filter :find_recipeable, :only => [:index, :show, :new, :create, :edit, :update, :destroy]
   before_filter :build_new_recipe, :only => [:new]  # Override loading of resource in load_and_authorize_resource
   before_filter :build_recipe, :only => [:create]  # Override loading of resource in load_and_authorize_resource
-  load_and_authorize_resource
+  load_and_authorize_resource :recipe
   layout 'admin'
 
   respond_to :html, :xml, :json
@@ -30,13 +30,13 @@ class Admin::RecipesController < ApplicationController
     cooking_time_and_timeunit = Recipe.set_cooking_time_and_timeunit(recipe)
     set_cooking_time_and_timeunit(cooking_time_and_timeunit)
     @serves = @recipe.serves
-    respond_with(:admin, @recipe)
+    respond_with(:admin, @recipeable, @recipe)
   end
 
   def new
     @course_name = params[:course_id].blank? ? "" : Course.find(params[:course_id]).name
     @course_id = params[:course_id].blank? ? "" : params[:course_id]
-    respond_with(:admin, @recipe)
+    respond_with(:admin, @recipeable, @recipe)
   end
 
   def edit
@@ -48,12 +48,10 @@ class Admin::RecipesController < ApplicationController
     cooking_time_and_timeunit = Recipe.set_cooking_time_and_timeunit(recipe)
     set_cooking_time_and_timeunit(cooking_time_and_timeunit)
     @serves = recipe.serves
-    respond_with(:admin, @recipe)
+    respond_with(:admin, @recipeable, @recipe)
   end
 
   def create
-    debugger
-
     flash[:notice] = "Recipe created successfully"  if @recipe.save
     respond_with(:admin, @recipeable, @recipe)
   end

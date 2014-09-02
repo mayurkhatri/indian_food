@@ -11,7 +11,7 @@ hn:
       signed_in: "Safaltapurvak Sign in hue"
   admin:
     generic:
-      new_method: "Naya"
+      new_method: "आप कैसे हैं"
       edit_method: "Badlain"
       delete_method: "Khatam"
       show: "Dikhao"
